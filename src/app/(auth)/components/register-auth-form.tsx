@@ -7,13 +7,11 @@ import { Icons } from "@/components/icons";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { useRouter } from "next/navigation";
-import {
-  createUserWithEmailAndPassword,
-  signInWithPopup,
-  GoogleAuthProvider,
-} from "firebase/auth";
 import { auth } from "@/firebase/config";
+import {
+  useCreateUserWithEmailAndPassword,
+  useSignInWithGoogle,
+} from "react-firebase-hooks/auth";
 
 interface RegisterAuthFormProps extends React.HTMLAttributes<HTMLDivElement> {}
 
@@ -25,14 +23,17 @@ export function RegisterAuthForm({
   const [isLoadingGoogle, setIsLoadingGoogle] = React.useState<boolean>(false);
   const [email, setEmail] = React.useState("");
   const [password, setPassword] = React.useState("");
-  const router = useRouter();
+  const [signInWithGoogleProvider, userGoogle, loadingGoogle, errorGoogle] =
+    useSignInWithGoogle(auth);
+  const [signUpWithEmail, userEmail, loadingEmail, errorEmail] =
+    useCreateUserWithEmailAndPassword(auth);
 
   async function onSubmit(event: React.SyntheticEvent) {
     event.preventDefault();
     setIsLoadingEmail(true);
 
     try {
-      const res = await createUserWithEmailAndPassword(auth, email, password);
+      const res = await signUpWithEmail(email, password);
       console.log(res);
       setEmail("");
       setPassword("");
@@ -45,9 +46,7 @@ export function RegisterAuthForm({
   async function signInWithGoogle() {
     setIsLoadingGoogle(true);
     try {
-      const provider = new GoogleAuthProvider();
-      const res = await signInWithPopup(auth, provider);
-      console.log(res);
+      await signInWithGoogleProvider();
     } catch (error) {
       console.log(error);
     }

@@ -7,12 +7,11 @@ import { Icons } from "@/components/icons";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import {
-  signInWithEmailAndPassword,
-  signInWithPopup,
-  GoogleAuthProvider,
-} from "firebase/auth";
 import { auth } from "@/firebase/config";
+import {
+  useSignInWithEmailAndPassword,
+  useSignInWithGoogle,
+} from "react-firebase-hooks/auth";
 
 interface LoginAuthFormProps extends React.HTMLAttributes<HTMLDivElement> {}
 
@@ -21,13 +20,18 @@ export function LoginAuthForm({ className, ...props }: LoginAuthFormProps) {
   const [isLoadingGoogle, setIsLoadingGoogle] = React.useState<boolean>(false);
   const [email, setEmail] = React.useState("");
   const [password, setPassword] = React.useState("");
+  const [signInWithGoogleProvider, userGoogle, loadingGoogle, errorGoogle] =
+    useSignInWithGoogle(auth);
+
+  const [signInWithEmail, userEmail, loadingEmail, errorEmail] =
+    useSignInWithEmailAndPassword(auth);
 
   async function onSubmit(event: React.SyntheticEvent) {
     event.preventDefault();
     setIsLoadingEmail(true);
 
     try {
-      const res = await signInWithEmailAndPassword(auth, email, password);
+      const res = await signInWithEmail(email, password);
       console.log(res);
       setEmail("");
       setPassword("");
@@ -40,9 +44,7 @@ export function LoginAuthForm({ className, ...props }: LoginAuthFormProps) {
   async function signInWithGoogle() {
     setIsLoadingGoogle(true);
     try {
-      const provider = new GoogleAuthProvider();
-      const res = await signInWithPopup(auth, provider);
-      console.log(res.user);
+      await signInWithGoogleProvider();
     } catch (error) {
       console.log(error);
     }
