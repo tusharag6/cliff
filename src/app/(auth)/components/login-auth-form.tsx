@@ -7,19 +7,24 @@ import { Icons } from "@/components/icons";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { signInWithEmailAndPassword } from "firebase/auth";
+import {
+  signInWithEmailAndPassword,
+  signInWithPopup,
+  GoogleAuthProvider,
+} from "firebase/auth";
 import { auth } from "@/firebase/config";
 
 interface LoginAuthFormProps extends React.HTMLAttributes<HTMLDivElement> {}
 
 export function LoginAuthForm({ className, ...props }: LoginAuthFormProps) {
-  const [isLoading, setIsLoading] = React.useState<boolean>(false);
+  const [isLoadingEmail, setIsLoadingEmail] = React.useState<boolean>(false);
+  const [isLoadingGoogle, setIsLoadingGoogle] = React.useState<boolean>(false);
   const [email, setEmail] = React.useState("");
   const [password, setPassword] = React.useState("");
 
   async function onSubmit(event: React.SyntheticEvent) {
     event.preventDefault();
-    setIsLoading(true);
+    setIsLoadingEmail(true);
 
     try {
       const res = await signInWithEmailAndPassword(auth, email, password);
@@ -29,7 +34,19 @@ export function LoginAuthForm({ className, ...props }: LoginAuthFormProps) {
     } catch (error) {
       console.log(error);
     }
-    setIsLoading(false);
+    setIsLoadingEmail(false);
+  }
+
+  async function signInWithGoogle() {
+    setIsLoadingGoogle(true);
+    try {
+      const provider = new GoogleAuthProvider();
+      const res = await signInWithPopup(auth, provider);
+      console.log(res.user);
+    } catch (error) {
+      console.log(error);
+    }
+    setIsLoadingGoogle(false);
   }
 
   return (
@@ -47,7 +64,7 @@ export function LoginAuthForm({ className, ...props }: LoginAuthFormProps) {
               autoCapitalize="none"
               autoComplete="email"
               autoCorrect="off"
-              disabled={isLoading}
+              disabled={isLoadingEmail || isLoadingGoogle}
               value={email}
               onChange={(e) => setEmail(e.target.value)}
             />
@@ -63,13 +80,13 @@ export function LoginAuthForm({ className, ...props }: LoginAuthFormProps) {
               autoCapitalize="none"
               autoComplete="password"
               autoCorrect="off"
-              disabled={isLoading}
+              disabled={isLoadingEmail || isLoadingGoogle}
               value={password}
               onChange={(e) => setPassword(e.target.value)}
             />
           </div>
-          <Button disabled={isLoading}>
-            {isLoading && (
+          <Button disabled={isLoadingEmail || isLoadingGoogle}>
+            {isLoadingEmail && (
               <Icons.spinner className="mr-2 h-4 w-4 animate-spin" />
             )}
             Login
@@ -86,8 +103,13 @@ export function LoginAuthForm({ className, ...props }: LoginAuthFormProps) {
           </span>
         </div>
       </div>
-      <Button variant="outline" type="button" disabled={isLoading}>
-        {isLoading ? (
+      <Button
+        variant="outline"
+        type="button"
+        disabled={isLoadingGoogle || isLoadingEmail}
+        onClick={signInWithGoogle}
+      >
+        {isLoadingGoogle ? (
           <Icons.spinner className="mr-2 h-4 w-4 animate-spin" />
         ) : (
           <Icons.google className="mr-2 h-4 w-4" />

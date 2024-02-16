@@ -8,7 +8,11 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { useRouter } from "next/navigation";
-import { createUserWithEmailAndPassword } from "firebase/auth";
+import {
+  createUserWithEmailAndPassword,
+  signInWithPopup,
+  GoogleAuthProvider,
+} from "firebase/auth";
 import { auth } from "@/firebase/config";
 
 interface RegisterAuthFormProps extends React.HTMLAttributes<HTMLDivElement> {}
@@ -17,14 +21,15 @@ export function RegisterAuthForm({
   className,
   ...props
 }: RegisterAuthFormProps) {
-  const [isLoading, setIsLoading] = React.useState<boolean>(false);
+  const [isLoadingEmail, setIsLoadingEmail] = React.useState<boolean>(false);
+  const [isLoadingGoogle, setIsLoadingGoogle] = React.useState<boolean>(false);
   const [email, setEmail] = React.useState("");
   const [password, setPassword] = React.useState("");
   const router = useRouter();
 
   async function onSubmit(event: React.SyntheticEvent) {
     event.preventDefault();
-    setIsLoading(true);
+    setIsLoadingEmail(true);
 
     try {
       const res = await createUserWithEmailAndPassword(auth, email, password);
@@ -34,7 +39,19 @@ export function RegisterAuthForm({
     } catch (error) {
       console.log(error);
     }
-    setIsLoading(false);
+    setIsLoadingEmail(false);
+  }
+
+  async function signInWithGoogle() {
+    setIsLoadingGoogle(true);
+    try {
+      const provider = new GoogleAuthProvider();
+      const res = await signInWithPopup(auth, provider);
+      console.log(res);
+    } catch (error) {
+      console.log(error);
+    }
+    setIsLoadingGoogle(false);
   }
 
   return (
@@ -52,7 +69,7 @@ export function RegisterAuthForm({
               autoCapitalize="none"
               autoComplete="email"
               autoCorrect="off"
-              disabled={isLoading}
+              disabled={isLoadingEmail || isLoadingGoogle}
               value={email}
               onChange={(e) => setEmail(e.target.value)}
             />
@@ -68,13 +85,13 @@ export function RegisterAuthForm({
               autoCapitalize="none"
               autoComplete="password"
               autoCorrect="off"
-              disabled={isLoading}
+              disabled={isLoadingEmail || isLoadingGoogle}
               value={password}
               onChange={(e) => setPassword(e.target.value)}
             />
           </div>
-          <Button disabled={isLoading}>
-            {isLoading && (
+          <Button disabled={isLoadingEmail || isLoadingGoogle}>
+            {isLoadingEmail && (
               <Icons.spinner className="mr-2 h-4 w-4 animate-spin" />
             )}
             Register
@@ -91,8 +108,13 @@ export function RegisterAuthForm({
           </span>
         </div>
       </div>
-      <Button variant="outline" type="button" disabled={isLoading}>
-        {isLoading ? (
+      <Button
+        variant="outline"
+        type="button"
+        disabled={isLoadingEmail || isLoadingGoogle}
+        onClick={signInWithGoogle}
+      >
+        {isLoadingGoogle ? (
           <Icons.spinner className="mr-2 h-4 w-4 animate-spin" />
         ) : (
           <Icons.google className="mr-2 h-4 w-4" />
