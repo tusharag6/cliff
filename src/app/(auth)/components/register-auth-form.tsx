@@ -7,11 +7,15 @@ import { Icons } from "@/components/icons";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { auth } from "@/firebase/config";
+import { useRouter } from "next/navigation";
 import {
-  useCreateUserWithEmailAndPassword,
-  useSignInWithGoogle,
-} from "react-firebase-hooks/auth";
+  createUserWithEmailAndPassword,
+  signInWithPopup,
+  GoogleAuthProvider,
+} from "firebase/auth";
+import { auth } from "@/firebase/config";
+import toast from "react-hot-toast";
+import type { AuthError } from "firebase/auth";
 
 interface RegisterAuthFormProps extends React.HTMLAttributes<HTMLDivElement> {}
 
@@ -23,22 +27,30 @@ export function RegisterAuthForm({
   const [isLoadingGoogle, setIsLoadingGoogle] = React.useState<boolean>(false);
   const [email, setEmail] = React.useState("");
   const [password, setPassword] = React.useState("");
-  const [signInWithGoogleProvider, userGoogle, loadingGoogle, errorGoogle] =
-    useSignInWithGoogle(auth);
-  const [signUpWithEmail, userEmail, loadingEmail, errorEmail] =
-    useCreateUserWithEmailAndPassword(auth);
+  const router = useRouter();
 
   async function onSubmit(event: React.SyntheticEvent) {
     event.preventDefault();
     setIsLoadingEmail(true);
 
     try {
-      const res = await signUpWithEmail(email, password);
-      console.log(res);
+      const res = await createUserWithEmailAndPassword(auth, email, password);
       setEmail("");
       setPassword("");
+      if (res.user) {
+        toast.success("Login Sucessfully!");
+      }
     } catch (error) {
-      console.log(error);
+      const authError = error as AuthError;
+      if (authError.code === "auth/invalid-credential") {
+        toast.error("Invalid Credentials! Please try again.");
+      } else if (authError.code === "auth/user-not-found") {
+        toast("You are not registered yet! Please register first.", {
+          icon: "🚫",
+        });
+      } else {
+        toast.error("Some Error Occured, please try again!");
+      }
     }
     setIsLoadingEmail(false);
   }
@@ -46,9 +58,22 @@ export function RegisterAuthForm({
   async function signInWithGoogle() {
     setIsLoadingGoogle(true);
     try {
-      await signInWithGoogleProvider();
+      const provider = new GoogleAuthProvider();
+      const res = await signInWithPopup(auth, provider);
+      if (res.user) {
+        toast.success("Login Sucessfully!");
+      }
     } catch (error) {
-      console.log(error);
+      const authError = error as AuthError;
+      if (authError.code === "auth/invalid-credential") {
+        toast.error("Invalid Credentials! Please try again.");
+      } else if (authError.code === "auth/user-not-found") {
+        toast("You are not registered yet! Please register first.", {
+          icon: "🚫",
+        });
+      } else {
+        toast.error("Some Error Occured, please try again!");
+      }
     }
     setIsLoadingGoogle(false);
   }

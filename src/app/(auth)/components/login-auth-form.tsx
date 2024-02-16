@@ -7,11 +7,14 @@ import { Icons } from "@/components/icons";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { auth } from "@/firebase/config";
 import {
-  useSignInWithEmailAndPassword,
-  useSignInWithGoogle,
-} from "react-firebase-hooks/auth";
+  signInWithEmailAndPassword,
+  signInWithPopup,
+  GoogleAuthProvider,
+} from "firebase/auth";
+import { auth } from "@/firebase/config";
+import toast from "react-hot-toast";
+import type { AuthError } from "firebase/auth";
 
 interface LoginAuthFormProps extends React.HTMLAttributes<HTMLDivElement> {}
 
@@ -20,23 +23,29 @@ export function LoginAuthForm({ className, ...props }: LoginAuthFormProps) {
   const [isLoadingGoogle, setIsLoadingGoogle] = React.useState<boolean>(false);
   const [email, setEmail] = React.useState("");
   const [password, setPassword] = React.useState("");
-  const [signInWithGoogleProvider, userGoogle, loadingGoogle, errorGoogle] =
-    useSignInWithGoogle(auth);
-
-  const [signInWithEmail, userEmail, loadingEmail, errorEmail] =
-    useSignInWithEmailAndPassword(auth);
 
   async function onSubmit(event: React.SyntheticEvent) {
     event.preventDefault();
     setIsLoadingEmail(true);
 
     try {
-      const res = await signInWithEmail(email, password);
-      console.log(res);
+      const res = await signInWithEmailAndPassword(auth, email, password);
       setEmail("");
       setPassword("");
+      if (res.user) {
+        toast.success("Login Sucessfully!");
+      }
     } catch (error) {
-      console.log(error);
+      const authError = error as AuthError;
+      if (authError.code === "auth/invalid-credential") {
+        toast.error("Invalid Credentials! Please try again.");
+      } else if (authError.code === "auth/user-not-found") {
+        toast("You are not registered yet! Please register first.", {
+          icon: "🚫",
+        });
+      } else {
+        toast.error("Some Error Occured, please try again!");
+      }
     }
     setIsLoadingEmail(false);
   }
@@ -44,9 +53,22 @@ export function LoginAuthForm({ className, ...props }: LoginAuthFormProps) {
   async function signInWithGoogle() {
     setIsLoadingGoogle(true);
     try {
-      await signInWithGoogleProvider();
+      const provider = new GoogleAuthProvider();
+      const res = await signInWithPopup(auth, provider);
+      if (res.user) {
+        toast.success("Login Sucessfully!");
+      }
     } catch (error) {
-      console.log(error);
+      const authError = error as AuthError;
+      if (authError.code === "auth/invalid-credential") {
+        toast.error("Invalid Credentials! Please try again.");
+      } else if (authError.code === "auth/user-not-found") {
+        toast("You are not registered yet! Please register first.", {
+          icon: "🚫",
+        });
+      } else {
+        toast.error("Some Error Occured, please try again!");
+      }
     }
     setIsLoadingGoogle(false);
   }
