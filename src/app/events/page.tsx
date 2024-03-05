@@ -112,3 +112,23 @@ const Page = () => {
 };
 
 export default Page;
+
+// Document ID
+// club
+// clubmembersic1
+// clubmembersic2
+// currentUser
+//eventVenue
+//eventdescription
+// eventfinishdatetime
+// eventname
+// eventstartdatetime
+// image_url
+// is_team_event
+// max_team_members
+// registered_participants
+// registered_teams
+//team_name
+// team_members
+// idea
+// idea_description
