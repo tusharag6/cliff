@@ -16,6 +16,17 @@ import {
   PopoverTrigger,
 } from "@/components/ui/popover";
 import { toast } from "@/components/ui/use-toast";
+import {
+  Select,
+  SelectContent,
+  SelectGroup,
+  SelectItem,
+  SelectLabel,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
+import { Textarea } from "@/components/ui/textarea";
+import { Checkbox } from "@/components/ui/checkbox";
 import { EventFormType, eventFormSchema } from "@/lib/types";
 import { cn } from "@/lib/utils";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -68,104 +79,275 @@ const EventForm = () => {
             <FormItem>
               <FormLabel>Event Description</FormLabel>
               <FormControl>
-                <Input placeholder="Event Description" {...field} />
+                <Textarea placeholder="Event Description" {...field} />
               </FormControl>
               <FormMessage />
             </FormItem>
           )}
         />
-        <FormField
-          control={form.control}
-          name="eventStartDateTime"
-          render={({ field }) => (
-            <FormItem className="flex flex-col">
-              <FormLabel>Event Start Date</FormLabel>
-              <Popover>
-                <PopoverTrigger asChild>
+        <div className="grid grid-flow-col gap-8">
+          <FormField
+            control={form.control}
+            name="eventVenue"
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel>Event Venue</FormLabel>
+                <FormControl>
+                  <Input placeholder="Event Venue" {...field} />
+                </FormControl>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+          <FormField
+            control={form.control}
+            name="organizedClub"
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel>Organizer Club</FormLabel>
+                <Select
+                  onValueChange={field.onChange}
+                  defaultValue={field.value}
+                >
                   <FormControl>
-                    <Button
-                      variant={"outline"}
-                      className={cn(
-                        "w-[240px] pl-3 text-left font-normal",
-                        !field.value && "text-muted-foreground"
-                      )}
-                    >
-                      {field.value ? (
-                        format(field.value, "PPP")
-                      ) : (
-                        <span>Pick a date</span>
-                      )}
-                      <CalendarIcon className="ml-auto h-4 w-4 opacity-50" />
-                    </Button>
+                    <SelectTrigger>
+                      <SelectValue placeholder="Select the organizer event club" />
+                    </SelectTrigger>
                   </FormControl>
-                </PopoverTrigger>
-                <PopoverContent className="w-auto p-0" align="start">
-                  <Calendar
-                    mode="single"
-                    selected={field.value}
-                    onSelect={field.onChange}
-                    disabled={(date) => date < new Date()}
-                    initialFocus
+                  <SelectContent>
+                    <SelectItem value="est">
+                      Eastern Standard Time (EST)
+                    </SelectItem>
+                    <SelectItem value="cst">
+                      Central Standard Time (CST)
+                    </SelectItem>
+                    <SelectItem value="mst">
+                      Mountain Standard Time (MST)
+                    </SelectItem>
+                    <SelectItem value="pst">
+                      Pacific Standard Time (PST)
+                    </SelectItem>
+                    <SelectItem value="akst">
+                      Alaska Standard Time (AKST)
+                    </SelectItem>
+                    <SelectItem value="hst">
+                      Hawaii Standard Time (HST)
+                    </SelectItem>
+                  </SelectContent>
+                </Select>
+
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+        </div>
+        <div className="grid grid-flow-col">
+          <FormField
+            control={form.control}
+            name="eventStartDateTime"
+            render={({ field }) => (
+              <FormItem className="flex flex-col">
+                <FormLabel>Event Start Date</FormLabel>
+                <Popover>
+                  <PopoverTrigger asChild>
+                    <FormControl>
+                      <Button
+                        variant={"outline"}
+                        className={cn(
+                          "w-[31.8rem] text-left font-normal",
+                          !field.value && "text-muted-foreground"
+                        )}
+                      >
+                        {field.value ? (
+                          format(field.value, "PPP")
+                        ) : (
+                          <span>Pick a date</span>
+                        )}
+                        <CalendarIcon className="ml-auto h-4 w-4 opacity-50" />
+                      </Button>
+                    </FormControl>
+                  </PopoverTrigger>
+                  <PopoverContent className="w-auto p-0" align="start">
+                    <Calendar
+                      mode="single"
+                      selected={field.value}
+                      onSelect={field.onChange}
+                      disabled={(date) => date < new Date()}
+                      initialFocus
+                    />
+                  </PopoverContent>
+                </Popover>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+          <FormField
+            control={form.control}
+            name="eventFinishDateTime"
+            render={({ field }) => (
+              <FormItem className="flex flex-col ml-8">
+                <FormLabel>Event End Date</FormLabel>
+                <Popover>
+                  <PopoverTrigger asChild>
+                    <FormControl>
+                      <Button
+                        variant={"outline"}
+                        className={cn(
+                          "w-[34rem] text-left font-normal",
+                          !field.value && "text-muted-foreground"
+                        )}
+                      >
+                        {field.value ? (
+                          format(field.value, "PPP")
+                        ) : (
+                          <span>Pick a date</span>
+                        )}
+                        <CalendarIcon className="ml-auto h-4 w-4 opacity-50" />
+                      </Button>
+                    </FormControl>
+                  </PopoverTrigger>
+                  <PopoverContent className="w-auto p-0" align="start">
+                    <Calendar
+                      mode="single"
+                      selected={field.value}
+                      onSelect={field.onChange}
+                      disabled={(date) => date < new Date()}
+                      initialFocus
+                    />
+                  </PopoverContent>
+                </Popover>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+        </div>
+        <div className="grid grid-cols-2">
+          <FormField
+            control={form.control}
+            name="isTeamEvent"
+            render={({ field }) => (
+              <FormItem className="flex space-x-2 items-center">
+                <FormControl>
+                  <Checkbox
+                    checked={field.value}
+                    onCheckedChange={field.onChange}
                   />
-                </PopoverContent>
-              </Popover>
-              <FormMessage />
-            </FormItem>
-          )}
-        />
-        <FormField
-          control={form.control}
-          name="eventFinishDateTime"
-          render={({ field }) => (
-            <FormItem className="flex flex-col">
-              <FormLabel>Event End Date</FormLabel>
-              <Popover>
-                <PopoverTrigger asChild>
+                </FormControl>
+                <div className="leading-none pb-2">
+                  <FormLabel>Is this a team event ? </FormLabel>
+                </div>
+              </FormItem>
+            )}
+          />
+          {form.watch("isTeamEvent") && (
+            <FormField
+              control={form.control}
+              name="maxTeamMembers"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>Maximum Team Members</FormLabel>
                   <FormControl>
-                    <Button
-                      variant={"outline"}
-                      className={cn(
-                        "w-[240px] pl-3 text-left font-normal",
-                        !field.value && "text-muted-foreground"
-                      )}
-                    >
-                      {field.value ? (
-                        format(field.value, "PPP")
-                      ) : (
-                        <span>Pick a date</span>
-                      )}
-                      <CalendarIcon className="ml-auto h-4 w-4 opacity-50" />
-                    </Button>
+                    <Input type="number" {...field} />
                   </FormControl>
-                </PopoverTrigger>
-                <PopoverContent className="w-auto p-0" align="start">
-                  <Calendar
-                    mode="single"
-                    selected={field.value}
-                    onSelect={field.onChange}
-                    disabled={(date) => date < new Date()}
-                    initialFocus
-                  />
-                </PopoverContent>
-              </Popover>
-              <FormMessage />
-            </FormItem>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
           )}
-        />
+        </div>
         <FormField
           control={form.control}
-          name="eventVenue"
+          name="contactMembersDetails"
           render={({ field }) => (
             <FormItem>
-              <FormLabel>Event Venue</FormLabel>
+              <FormLabel>Contacts</FormLabel>
+              <div className="grid grid-cols-2">
+                <div className="mr-8">
+                  <Select
+                    onValueChange={field.onChange}
+                    defaultValue={field.value}
+                  >
+                    <FormControl>
+                      <SelectTrigger>
+                        <SelectValue placeholder="Contact Person SIC" />
+                      </SelectTrigger>
+                    </FormControl>
+                    <SelectContent>
+                      <SelectItem value="est">
+                        Eastern Standard Time (EST)
+                      </SelectItem>
+                      <SelectItem value="cst">
+                        Central Standard Time (CST)
+                      </SelectItem>
+                      <SelectItem value="mst">
+                        Mountain Standard Time (MST)
+                      </SelectItem>
+                      <SelectItem value="pst">
+                        Pacific Standard Time (PST)
+                      </SelectItem>
+                      <SelectItem value="akst">
+                        Alaska Standard Time (AKST)
+                      </SelectItem>
+                      <SelectItem value="hst">
+                        Hawaii Standard Time (HST)
+                      </SelectItem>
+                    </SelectContent>
+                  </Select>
+                </div>
+
+                <Select
+                  onValueChange={field.onChange}
+                  defaultValue={field.value}
+                >
+                  <FormControl>
+                    <SelectTrigger>
+                      <SelectValue placeholder="Contact Person SIC" />
+                    </SelectTrigger>
+                  </FormControl>
+                  <SelectContent>
+                    <SelectItem value="est">
+                      Eastern Standard Time (EST)
+                    </SelectItem>
+                    <SelectItem value="cst">
+                      Central Standard Time (CST)
+                    </SelectItem>
+                    <SelectItem value="mst">
+                      Mountain Standard Time (MST)
+                    </SelectItem>
+                    <SelectItem value="pst">
+                      Pacific Standard Time (PST)
+                    </SelectItem>
+                    <SelectItem value="akst">
+                      Alaska Standard Time (AKST)
+                    </SelectItem>
+                    <SelectItem value="hst">
+                      Hawaii Standard Time (HST)
+                    </SelectItem>
+                  </SelectContent>
+                </Select>
+              </div>
+
+              <FormMessage />
+            </FormItem>
+          )}
+        />
+        <FormField
+          control={form.control}
+          name="eventImage"
+          render={({ field }) => (
+            <FormItem>
+              <FormLabel>Event Image</FormLabel>
               <FormControl>
-                <Input placeholder="Event Venue" {...field} />
+                <Input type="file" {...field} />
               </FormControl>
               <FormMessage />
             </FormItem>
           )}
         />
         <Button type="submit">Create Event</Button>
+        <Button className="mx-4" variant={"secondary"}>
+          Save Draft
+        </Button>
       </form>
     </Form>
   );

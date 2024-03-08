@@ -20,6 +20,19 @@ export const eventFormSchema = z.object({
   eventVenue: z.string().max(100, {
     message: "Event venue must not be longer than 100 characters.",
   }),
+  organizedClub: z.string().max(50, {
+    message: "Please select the club organizing the event.",
+  }),
+  eventImage: z.string().url({
+    message: "Event image must be a valid URL.",
+  }),
+  contactMembersDetails: z.string().max(200, {
+    message: "Contact members must be selected.",
+  }),
+  isTeamEvent: z.boolean(),
+  maxTeamMembers: z.number().min(1, {
+    message: "Maximum team members must be at least 1.",
+  }),
 });
 
 export type EventFormType = z.infer<typeof eventFormSchema>;
