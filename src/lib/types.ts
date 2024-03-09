@@ -11,10 +11,10 @@ export const eventFormSchema = z.object({
   eventDescription: z.string().max(200, {
     message: "Event description must not be longer than 200 characters.",
   }),
-  eventStartDateTime: z.date({
+  eventStartDateTime: z.string({
     required_error: "Please select a start date and time for the event.",
   }),
-  eventFinishDateTime: z.date({
+  eventFinishDateTime: z.string({
     required_error: "Please select a finish date and time for the event.",
   }),
   eventVenue: z.string().max(100, {
