@@ -6,7 +6,7 @@ import { RegisterEventCard } from "../components/register-card";
 
 const EventsDetailsPage = () => {
   return (
-    <div className="container py-4">
+    <div className="container px-32 py-4">
       <div>
         <Image
           src="/img1.jpg"

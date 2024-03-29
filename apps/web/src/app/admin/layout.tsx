@@ -22,7 +22,7 @@ export default function RootLayout({
           <div className="hidden lg:block">
             <Sidebar />
           </div>
-          <section className="container py-8 col-span-3 lg:col-span-4 lg:border-l">
+          <section className="container py-8 px-8 col-span-3 lg:col-span-4 lg:border-l">
             {children}
           </section>
         </div>
