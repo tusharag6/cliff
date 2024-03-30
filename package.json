@@ -2,11 +2,12 @@
   "private": true,
   "scripts": {
     "build": "turbo build",
-    "dev": "dotenv -- turbo dev",
+    "dev": "NEXT_PUBLIC_APP_ENV='emulator' dotenv -- turbo dev",
     "lint": "turbo lint",
     "type-check": "turbo type-check",
     "clean": "turbo clean",
-    "format": "prettier --write \"**/*.{ts,tsx,md}\""
+    "format": "prettier --write \"**/*.{ts,tsx,md}\"",
+    "emulators": "firebase emulators:start"
   },
   "devDependencies": {
     "@repo/typescript-config": "*",
