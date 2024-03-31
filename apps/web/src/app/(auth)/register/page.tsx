@@ -13,7 +13,7 @@ export const metadata: Metadata = {
 export default function RegisterPage() {
   return (
     <>
-      <Toaster position="top-right" reverseOrder={false} />
+      {/* <Toaster position="top-right" reverseOrder={false} /> */}
       <div className="container h-[100vh] flex justify-center content-center ">
         <div className="lg:p-8 flex">
           <div className="mx-auto flex w-full flex-col justify-center space-y-6 sm:w-[350px]">
