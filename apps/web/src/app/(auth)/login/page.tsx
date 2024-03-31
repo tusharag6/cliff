@@ -9,8 +9,6 @@ export const metadata: Metadata = {
   description: "Login to your Cliff account to access your dashboard and more",
 };
 
-console.log("hi");
-
 export default function LoginPage() {
   return (
     <>

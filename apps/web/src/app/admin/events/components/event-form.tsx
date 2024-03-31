@@ -1,6 +1,6 @@
 "use client";
-import { Button } from "@repo/ui/components/ui/button";
-import { Calendar } from "@repo/ui/components/ui/calendar";
+import { Button } from "@repo/ui/button";
+import { Calendar } from "@repo/ui/calendar";
 import {
   Form,
   FormControl,
@@ -8,14 +8,10 @@ import {
   FormItem,
   FormLabel,
   FormMessage,
-} from "@repo/ui/components/ui/form";
-import { Input } from "@repo/ui/components/ui/input";
-import {
-  Popover,
-  PopoverContent,
-  PopoverTrigger,
-} from "@repo/ui/components/ui/popover";
-import { toast } from "@repo/ui/components/ui/use-toast";
+} from "@repo/ui/form";
+import { Input } from "@repo/ui/input";
+import { Popover, PopoverContent, PopoverTrigger } from "@repo/ui/popover";
+import { toast } from "@repo/ui/use-toast";
 import {
   Select,
   SelectContent,
@@ -24,11 +20,11 @@ import {
   SelectLabel,
   SelectTrigger,
   SelectValue,
-} from "@repo/ui/components/ui/select";
-import { Textarea } from "@repo/ui/components/ui/textarea";
-import { Checkbox } from "@repo/ui/components/ui/checkbox";
+} from "@repo/ui/select";
+import { Textarea } from "@repo/ui/textarea";
+import { Checkbox } from "@repo/ui/checkbox";
 import { EventFormType, eventFormSchema } from "@repo/types";
-import { cn } from "@repo/ui/lib/util";
+import { cn } from "@repo/ui/util";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { format } from "date-fns";
 import { CalendarIcon } from "lucide-react";

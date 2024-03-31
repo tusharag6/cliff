@@ -1,5 +1,5 @@
 import React from "react";
-import { Icons } from "@repo/ui/components/icons";
+import { Icons } from "@repo/ui/icons";
 import Image from "next/image";
 import EventsImageCarousel from "../components/event-image-carousel";
 import { RegisterEventCard } from "../components/register-card";

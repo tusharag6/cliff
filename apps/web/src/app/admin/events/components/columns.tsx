@@ -3,7 +3,7 @@ import { ColumnDef } from "@tanstack/react-table";
 import { EventFormType as Event } from "@repo/types";
 import { ArrowUpDown, MoreHorizontal } from "lucide-react";
 
-import { Button } from "@repo/ui/components/ui/button";
+import { Button } from "@repo/ui/button";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -11,7 +11,7 @@ import {
   DropdownMenuLabel,
   DropdownMenuSeparator,
   DropdownMenuTrigger,
-} from "@repo/ui/components/ui/dropdown-menu";
+} from "@repo/ui/dropdown";
 
 export const columns: ColumnDef<Event>[] = [
   {

@@ -1,6 +1,6 @@
 "use client";
 
-import { Button } from "@repo/ui/components/ui/button";
+import { Button } from "@repo/ui/button";
 import {
   Card,
   CardContent,
@@ -8,17 +8,17 @@ import {
   CardFooter,
   CardHeader,
   CardTitle,
-} from "@repo/ui/components/ui/card";
-import { Input } from "@repo/ui/components/ui/input";
-import { Label } from "@repo/ui/components/ui/label";
+} from "@repo/ui/card";
+import { Input } from "@repo/ui/input";
+import { Label } from "@repo/ui/label";
 import {
   Select,
   SelectContent,
   SelectItem,
   SelectTrigger,
   SelectValue,
-} from "@repo/ui/components/ui/select";
-import { Textarea } from "@repo/ui/components/ui/textarea";
+} from "@repo/ui/select";
+import { Textarea } from "@repo/ui/textarea";
 
 export function RegisterEventCard() {
   return (

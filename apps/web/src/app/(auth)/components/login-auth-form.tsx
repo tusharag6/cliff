@@ -2,11 +2,11 @@
 
 import * as React from "react";
 
-import { cn } from "@repo/ui/lib/util";
-import { Icons } from "@repo/ui/components/icons";
-import { Button } from "@repo/ui/components/ui/button";
-import { Input } from "@repo/ui/components/ui/input";
-import { Label } from "@repo/ui/components/ui/label";
+import { cn } from "@repo/ui/util";
+import { Icons } from "@repo/ui/icons";
+import { Button } from "@repo/ui/button";
+import { Input } from "@repo/ui/input";
+import { Label } from "@repo/ui/label";
 import {
   signInWithEmailAndPassword,
   signInWithPopup,

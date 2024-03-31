@@ -1,5 +1,5 @@
 "use client";
-import { Button } from "@repo/ui/components/ui/button";
+import { Button } from "@repo/ui/button";
 import { CalendarPlus, CalendarSearch } from "lucide-react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";

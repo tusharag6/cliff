@@ -1,13 +1,8 @@
 import React from "react";
 import EventCard from "./components/event-card";
-import { Button } from "@repo/ui/components/ui/button";
-import { Icons } from "@repo/ui/components/icons";
-import {
-  Tabs,
-  TabsContent,
-  TabsList,
-  TabsTrigger,
-} from "@repo/ui/components/ui/tabs";
+import { Button } from "@repo/ui/button";
+import { Icons } from "@repo/ui/icons";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@repo/ui/tabs";
 import Link from "next/link";
 import Image from "next/image";
 
