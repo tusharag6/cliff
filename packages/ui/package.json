@@ -78,6 +78,7 @@
     "./use-toast": "./src/components/ui/use-toast.ts",
     "./icons": "./src/components/icons.tsx",
     "./theme-provider": "./src/components/theme-provider.tsx",
-    "./util": "./src/lib/util.ts"
+    "./util": "./src/lib/util.ts",
+    "./globals": "./styles/globals.css"
   }
 }
