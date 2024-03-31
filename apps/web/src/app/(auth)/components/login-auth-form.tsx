@@ -12,7 +12,7 @@ import {
   signInWithPopup,
   GoogleAuthProvider,
 } from "firebase/auth";
-import { auth } from "@repo/firebase-config/client";
+import auth from "@repo/firebase-config/client";
 import toast from "react-hot-toast";
 import type { AuthError } from "firebase/auth";
 
