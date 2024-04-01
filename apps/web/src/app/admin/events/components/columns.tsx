@@ -92,11 +92,10 @@ export const columns: ColumnDef<Event>[] = [
               <MoreHorizontal className="h-4 w-4" />
             </Button>
           </DropdownMenuTrigger>
-          <DropdownMenuContent align="end">
-            <DropdownMenuLabel>Actions</DropdownMenuLabel>
-            <DropdownMenuSeparator />
-            <DropdownMenuItem>View customer</DropdownMenuItem>
-            <DropdownMenuItem>View payment details</DropdownMenuItem>
+          <DropdownMenuContent align="end" className="p-4">
+            <DropdownMenuItem className="pb-2">More Details</DropdownMenuItem>
+            <DropdownMenuItem className="pb-2">Edit</DropdownMenuItem>
+            <DropdownMenuItem>Delete</DropdownMenuItem>
           </DropdownMenuContent>
         </DropdownMenu>
       );

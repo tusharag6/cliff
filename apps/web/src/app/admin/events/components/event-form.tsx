@@ -81,12 +81,12 @@ const EventForm = () => {
             </FormItem>
           )}
         />
-        <div className="grid grid-flow-col gap-8">
+        <div className="grid grid-cols-2 gap-8">
           <FormField
             control={form.control}
             name="eventVenue"
             render={({ field }) => (
-              <FormItem>
+              <FormItem className="flex flex-col">
                 <FormLabel>Event Venue</FormLabel>
                 <FormControl>
                   <Input placeholder="Event Venue" {...field} />
@@ -99,7 +99,7 @@ const EventForm = () => {
             control={form.control}
             name="organizedClub"
             render={({ field }) => (
-              <FormItem>
+              <FormItem className="flex flex-col">
                 <FormLabel>Organizer Club</FormLabel>
                 <Select
                   onValueChange={field.onChange}
@@ -137,7 +137,7 @@ const EventForm = () => {
             )}
           />
         </div>
-        <div className="grid grid-flow-col">
+        <div className="grid grid-cols-2 gap-8">
           <FormField
             control={form.control}
             name="eventStartDateTime"
@@ -150,7 +150,7 @@ const EventForm = () => {
                       <Button
                         variant={"outline"}
                         className={cn(
-                          "w-[31.8rem] text-left font-normal",
+                          "text-left font-normal",
                           !field.value && "text-muted-foreground"
                         )}
                       >
@@ -181,7 +181,7 @@ const EventForm = () => {
             control={form.control}
             name="eventFinishDateTime"
             render={({ field }) => (
-              <FormItem className="flex flex-col ml-8">
+              <FormItem className="flex flex-col">
                 <FormLabel>Event End Date</FormLabel>
                 <Popover>
                   <PopoverTrigger asChild>
@@ -189,7 +189,7 @@ const EventForm = () => {
                       <Button
                         variant={"outline"}
                         className={cn(
-                          "w-[34rem] text-left font-normal",
+                          "text-left font-normal",
                           !field.value && "text-muted-foreground"
                         )}
                       >
@@ -217,7 +217,7 @@ const EventForm = () => {
             )}
           />
         </div>
-        <div className="grid grid-cols-2">
+        <div className="grid grid-cols-2 gap-8">
           <FormField
             control={form.control}
             name="isTeamEvent"
@@ -225,6 +225,7 @@ const EventForm = () => {
               <FormItem className="flex space-x-2 items-center">
                 <FormControl>
                   <Checkbox
+                    className="rounded-sm"
                     checked={field.value}
                     onCheckedChange={field.onChange}
                   />
@@ -240,7 +241,7 @@ const EventForm = () => {
               control={form.control}
               name="maxTeamMembers"
               render={({ field }) => (
-                <FormItem>
+                <FormItem className="flex flex-col">
                   <FormLabel>Maximum Team Members</FormLabel>
                   <FormControl>
                     <Input type="number" {...field} />
@@ -257,8 +258,8 @@ const EventForm = () => {
           render={({ field }) => (
             <FormItem>
               <FormLabel>Contacts</FormLabel>
-              <div className="grid grid-cols-2">
-                <div className="mr-8">
+              <div className="grid grid-cols-2 gap-8">
+                <div>
                   <Select
                     onValueChange={field.onChange}
                     defaultValue={field.value}
@@ -340,8 +341,10 @@ const EventForm = () => {
             </FormItem>
           )}
         />
-        <Button type="submit">Create Event</Button>
-        <Button className="mx-4" variant={"secondary"}>
+        <Button type="submit" variant={"outline"}>
+          Create Event
+        </Button>
+        <Button className="mx-4" variant={"outline"}>
           Save Draft
         </Button>
       </form>
