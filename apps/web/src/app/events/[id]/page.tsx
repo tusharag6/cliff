@@ -30,7 +30,7 @@ const EventsDetailsPage = () => {
             <h2 className="text-3xl font-bold tracking-tight">
               Build a community of practice for UX leaders
             </h2>
-            <p className="flex text-gray-500 font-normal tracking-tighter">
+            <p className="flex text-muted-foreground font-normal tracking-tighter">
               <Users className="pr-2" color="gray" />
               50 Attendees
             </p>
@@ -49,10 +49,12 @@ const EventsDetailsPage = () => {
               <Home />
             </div>
             <div>
-              <h5 className="mb-2 mt-3 text-2xl font-semibold tracking-tight ">
+              <h5 className="mb-2 mt-3 text-2xl text-center font-semibold tracking-tight ">
                 Club
               </h5>
-              <p className="mb-2 font-normal text-gray-500">SMC</p>
+              <p className="mb-2 font-normal text-center text-muted-foreground">
+                Silicon Music Club
+              </p>
             </div>
           </div>
 
@@ -61,10 +63,12 @@ const EventsDetailsPage = () => {
               <MapPin />
             </div>
             <div>
-              <h5 className="mb-2 mt-3 text-2xl font-semibold tracking-tight ">
+              <h5 className="mb-2 mt-3 text-2xl text-center font-semibold tracking-tight ">
                 Venue
               </h5>
-              <p className="mb-2 font-normal text-gray-500">LT-1</p>
+              <p className="mb-2 font-normal text-center text-muted-foreground">
+                LT-1
+              </p>
             </div>
           </div>
 
@@ -73,10 +77,12 @@ const EventsDetailsPage = () => {
               <CalendarCheck />
             </div>
             <div>
-              <h5 className="mb-2 mt-3 text-2xl font-semibold tracking-tight ">
+              <h5 className="mb-2 mt-3 text-2xl text-center font-semibold tracking-tight ">
                 Start Date
               </h5>
-              <p className="mb-2 font-normal text-gray-500">15th March 2024</p>
+              <p className="mb-2 font-normal text-center text-muted-foreground">
+                15th March 2024
+              </p>
             </div>
           </div>
 
@@ -85,10 +91,12 @@ const EventsDetailsPage = () => {
               <CalendarX />
             </div>
             <div>
-              <h5 className="mb-2 mt-3 text-2xl font-semibold tracking-tight ">
+              <h5 className="mb-2 mt-3 text-2xl text-center font-semibold tracking-tight ">
                 End Date
               </h5>
-              <p className="mb-2 font-normal text-gray-500">20th March 2024</p>
+              <p className="mb-2 font-normal text-center text-muted-foreground">
+                20th March 2024
+              </p>
             </div>
           </div>
 
@@ -97,10 +105,12 @@ const EventsDetailsPage = () => {
               <Timer />
             </div>
             <div>
-              <h5 className="mb-2 mt-3 text-2xl font-semibold tracking-tight ">
+              <h5 className="mb-2 mt-3 text-2xl text-center font-semibold tracking-tight ">
                 Start Time
               </h5>
-              <p className="mb-2 font-normal text-gray-500">10:00 AM</p>
+              <p className="mb-2 font-normal text-center text-muted-foreground">
+                10:00 AM
+              </p>
             </div>
           </div>
 
@@ -109,10 +119,12 @@ const EventsDetailsPage = () => {
               <TimerOff />
             </div>
             <div>
-              <h5 className="mb-2 mt-3 text-2xl font-semibold tracking-tight ">
+              <h5 className="mb-2 mt-3 text-2xl text-center font-semibold tracking-tight ">
                 End Time
               </h5>
-              <p className="mb-2 font-normal text-gray-500">08:00 PM</p>
+              <p className="mb-2 font-normal text-center text-muted-foreground">
+                08:00 PM
+              </p>
             </div>
           </div>
         </div>
@@ -156,7 +168,7 @@ const EventsDetailsPage = () => {
             Contact Us
           </h4>
           <div className="flex gap-6">
-            <div className="flex justify-center text-center gap-4 text-gray-500 dark:text-gray-400">
+            <div className="flex justify-center text-center gap-4">
               <Image
                 src="/profile-picture-3.jpg"
                 alt="profile"
@@ -168,7 +180,9 @@ const EventsDetailsPage = () => {
                 <h3 className="text-xl font-bold tracking-tight">
                   <a href="#">Bonnie Green</a>
                 </h3>
-                <p>Mob: 909090758715</p>
+                <p className="text-muted-foreground text-center font-normal">
+                  Mob: 909090758715
+                </p>
               </div>
             </div>
           </div>
