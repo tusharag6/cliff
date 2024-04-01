@@ -2,7 +2,6 @@ import React from "react";
 import EventCard from "./components/event-card";
 import { Button } from "@repo/ui/button";
 import { Icons } from "@repo/ui/icons";
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@repo/ui/tabs";
 import Link from "next/link";
 import Image from "next/image";
 
@@ -10,7 +9,7 @@ const Page = () => {
   const products = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]; // Assuming you have an array of products
 
   return (
-    <div className="container px-32">
+    <div className="container">
       <div className="flex items-center justify-between content-center space-y-5">
         <div className="flex flex-col justify-center content-center">
           <h2 className="text-3xl font-bold tracking-tight pt-3">Events</h2>

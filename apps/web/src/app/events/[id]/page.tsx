@@ -1,17 +1,6 @@
 import React from "react";
-import { Icons } from "@repo/ui/icons";
 import Image from "next/image";
-import EventsImageCarousel from "../components/event-image-carousel";
-import { RegisterEventCard } from "../components/register-card";
 import { Button } from "@repo/ui/button";
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardFooter,
-  CardHeader,
-  CardTitle,
-} from "@repo/ui/card";
 import {
   CalendarCheck,
   CalendarX,
@@ -24,7 +13,7 @@ import {
 
 const EventsDetailsPage = () => {
   return (
-    <div className="container px-32 py-4">
+    <div className="container py-4">
       <div>
         <Image
           src="/img1.jpg"
@@ -47,7 +36,7 @@ const EventsDetailsPage = () => {
             </p>
           </div>
           <div>
-            <Button variant="outline" size={"lg"}>
+            <Button variant="outline" className="p-5 text-base">
               Register
             </Button>
           </div>
