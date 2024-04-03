@@ -1,12 +1,5 @@
 import { Button } from "@repo/ui/components/ui/button";
 import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardHeader,
-  CardTitle,
-} from "@repo/ui/components/ui/card";
-import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
@@ -14,7 +7,6 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@repo/ui/components/ui/dropdown-menu";
-import { Input } from "@repo/ui/components/ui/input";
 import {
   Sheet,
   SheetContent,
@@ -27,25 +19,7 @@ import {
   AccordionTrigger,
 } from "@repo/ui/components/ui/accordion";
 
-import {
-  Badge,
-  CalendarPlus,
-  CalendarSearch,
-  CircleUser,
-  Home,
-  LineChart,
-  LogOut,
-  Menu,
-  Package,
-  Package2,
-  Search,
-  Settings,
-  Shield,
-  ShoppingCart,
-  Ticket,
-  User,
-  Users,
-} from "lucide-react";
+import { CircleUser, LogOut, Menu, Settings, Shield, User } from "lucide-react";
 import Link from "next/link";
 import React from "react";
 

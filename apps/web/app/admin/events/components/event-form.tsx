@@ -19,9 +19,7 @@ import { toast } from "@repo/ui/use-toast";
 import {
   Select,
   SelectContent,
-  SelectGroup,
   SelectItem,
-  SelectLabel,
   SelectTrigger,
   SelectValue,
 } from "@repo/ui/components/ui/select";

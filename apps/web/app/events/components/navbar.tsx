@@ -101,8 +101,10 @@ const Navbar = () => {
             <DropdownMenuLabel>My Account</DropdownMenuLabel>
             <DropdownMenuSeparator />
             <DropdownMenuItem>
-              <Shield className="pr-2" />
-              Admin
+              <Link href="/admin/events/create" className="flex items-center">
+                <Shield className="pr-2 text-muted-foreground" />
+                <span>Admin</span>
+              </Link>
             </DropdownMenuItem>
             <DropdownMenuItem>
               <User className="pr-2" />

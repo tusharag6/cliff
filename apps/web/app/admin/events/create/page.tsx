@@ -1,4 +1,3 @@
-import { Separator } from "@repo/ui/components/ui/separator";
 import EventForm from "../components/event-form";
 
 export default function SettingsAccountPage() {
