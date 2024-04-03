@@ -223,8 +223,11 @@ export const events: EventFormType[] = [
 
 export default async function DemoPage() {
   return (
-    <div className="container mx-auto py-10">
-      <DataTable columns={columns} data={events} />
+    <div className="container">
+      <h1 className="text-lg font-semibold md:text-2xl">All Events</h1>
+      <div className="pt-4">
+        <DataTable columns={columns} data={events} />
+      </div>
     </div>
   );
 }

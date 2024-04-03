@@ -85,7 +85,7 @@ const EventForm = () => {
             </FormItem>
           )}
         />
-        <div className="grid grid-cols-2 gap-8">
+        <div className="grid md:grid-cols-2 gap-8">
           <FormField
             control={form.control}
             name="eventVenue"
@@ -141,7 +141,7 @@ const EventForm = () => {
             )}
           />
         </div>
-        <div className="grid grid-cols-2 gap-8">
+        <div className="grid md:grid-cols-2 gap-8">
           <FormField
             control={form.control}
             name="eventStartDateTime"
@@ -221,7 +221,7 @@ const EventForm = () => {
             )}
           />
         </div>
-        <div className="grid grid-cols-2 gap-8">
+        <div className="grid md:grid-cols-2 gap-8">
           <FormField
             control={form.control}
             name="isTeamEvent"
@@ -262,7 +262,7 @@ const EventForm = () => {
           render={({ field }) => (
             <FormItem>
               <FormLabel>Contacts</FormLabel>
-              <div className="grid grid-cols-2 gap-8">
+              <div className="grid md:grid-cols-2 gap-8">
                 <div>
                   <Select
                     onValueChange={field.onChange}
@@ -345,10 +345,10 @@ const EventForm = () => {
             </FormItem>
           )}
         />
-        <Button type="submit">Create Event</Button>
-        <Button className="mx-4" variant={"secondary"}>
-          Save Draft
-        </Button>
+        <div className="flex gap-4 ">
+          <Button variant={"secondary"}>Save Draft</Button>
+          <Button type="submit">Create Event</Button>
+        </div>
       </form>
     </Form>
   );
