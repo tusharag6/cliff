@@ -1,4 +1,3 @@
-"use client";
 import { Button } from "@repo/ui/components/ui/button";
 import {
   Card,
@@ -22,6 +21,13 @@ import {
   SheetTrigger,
 } from "@repo/ui/components/ui/sheet";
 import {
+  Accordion,
+  AccordionContent,
+  AccordionItem,
+  AccordionTrigger,
+} from "@repo/ui/components/ui/accordion";
+
+import {
   Badge,
   CalendarPlus,
   CalendarSearch,
@@ -41,12 +47,9 @@ import {
   Users,
 } from "lucide-react";
 import Link from "next/link";
-import { usePathname } from "next/navigation";
 import React from "react";
 
 const Navbar = () => {
-  const currentUrl = usePathname();
-
   return (
     <header className="flex h-14 items-center gap-4 border-b bg-muted/40 px-4 lg:h-[60px] lg:px-6">
       <Sheet>
@@ -58,42 +61,34 @@ const Navbar = () => {
         </SheetTrigger>
         <SheetContent side="left" className="flex flex-col">
           <nav className="grid gap-2 text-lg font-medium">
-            <div>
-              <h2 className="px-2 text-lg font-semibold tracking-tight">
-                Events
-              </h2>
-              <Link href="/admin/events/create">
-                <Button
-                  variant={
-                    currentUrl === "/admin/events/create"
-                      ? "secondary"
-                      : "ghost"
-                  }
-                  className="w-full mb-1 justify-start text-muted-foreground transition-all hover:text-primary"
-                >
-                  <CalendarPlus className="mr-2 h-4 w-4" />
-                  Add New Event
-                </Button>
-              </Link>
-              <Link href="/admin/events/all-events">
-                <Button
-                  variant={
-                    currentUrl === "/admin/events/all-events"
-                      ? "secondary"
-                      : "ghost"
-                  }
-                  className="w-full mb-1 justify-start text-muted-foreground transition-all hover:text-primary"
-                >
-                  <CalendarSearch className="mr-2 h-4 w-4" />
-                  View all Events
-                </Button>
-              </Link>
-            </div>
+            <Accordion type="single" collapsible>
+              <AccordionItem value="item-1" className="border-b-0">
+                <AccordionTrigger className="pb-1">Events</AccordionTrigger>
+                <AccordionContent className="p-0">
+                  <Button
+                    asChild
+                    variant={"link"}
+                    className="w-full justify-start transition-all hover:text-primary"
+                  >
+                    <Link href="/admin/events/create">Add New Event</Link>
+                  </Button>
+                  <Button
+                    asChild
+                    variant={"link"}
+                    className="w-full justify-start transition-all hover:text-primary"
+                  >
+                    <Link href="/admin/events/all-events">View all Events</Link>
+                  </Button>
+                </AccordionContent>
+              </AccordionItem>
+            </Accordion>
           </nav>
         </SheetContent>
       </Sheet>
       <div className="w-full flex-1">
-        <Button variant={"outline"}>Go To Home</Button>
+        <Button asChild variant={"outline"}>
+          <Link href="/">Go To Home</Link>
+        </Button>{" "}
       </div>
       <DropdownMenu>
         <DropdownMenuTrigger asChild>
@@ -106,8 +101,10 @@ const Navbar = () => {
           <DropdownMenuLabel>My Account</DropdownMenuLabel>
           <DropdownMenuSeparator />
           <DropdownMenuItem>
-            <Shield className="pr-2" />
-            Admin
+            <Link href="/admin/events/create" className="flex items-center">
+              <Shield className="pr-2 text-muted-foreground" />
+              <span>Admin</span>
+            </Link>
           </DropdownMenuItem>
           <DropdownMenuItem>
             <User className="pr-2" />
