@@ -35,7 +35,7 @@ export function Sidebar() {
                       ? "secondary"
                       : "ghost"
                   }
-                  className="w-full mb-1 justify-start text-muted-foreground transition-all hover:text-primary"
+                  className="w-full mb-1 justify-start transition-all hover:text-primary"
                 >
                   <CalendarPlus className="mr-2 h-4 w-4" />
                   Add New Event
@@ -48,7 +48,7 @@ export function Sidebar() {
                       ? "secondary"
                       : "ghost"
                   }
-                  className="w-full mb-1 justify-start text-muted-foreground transition-all hover:text-primary"
+                  className="w-full mb-1 justify-start transition-all hover:text-primary"
                 >
                   <CalendarSearch className="mr-2 h-4 w-4" />
                   View all Events
