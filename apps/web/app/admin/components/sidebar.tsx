@@ -1,6 +1,13 @@
 "use client";
 import Link from "next/link";
-import { Bell, CalendarPlus, CalendarSearch, Package2 } from "lucide-react";
+import {
+  Bell,
+  CalendarPlus,
+  CalendarSearch,
+  Package2,
+  Trophy,
+  Users,
+} from "lucide-react";
 
 import { Button } from "@repo/ui/components/ui/button";
 import { usePathname } from "next/navigation";
@@ -28,32 +35,58 @@ export function Sidebar() {
               <h2 className="px-2 text-lg font-semibold tracking-tight">
                 Events
               </h2>
-              <Link href="/admin/events/create">
-                <Button
-                  variant={
-                    currentUrl === "/admin/events/create"
-                      ? "secondary"
-                      : "ghost"
-                  }
-                  className="w-full mb-1 justify-start transition-all hover:text-primary"
-                >
+              <Button
+                asChild
+                variant={
+                  currentUrl === "/admin/events/create" ? "secondary" : "ghost"
+                }
+                className="w-full mb-1 justify-start transition-all hover:text-primary"
+              >
+                <Link href="/admin/events/create">
                   <CalendarPlus className="mr-2 h-4 w-4" />
                   Add New Event
-                </Button>
-              </Link>
-              <Link href="/admin/events/all-events">
-                <Button
-                  variant={
-                    currentUrl === "/admin/events/all-events"
-                      ? "secondary"
-                      : "ghost"
-                  }
-                  className="w-full mb-1 justify-start transition-all hover:text-primary"
-                >
+                </Link>
+              </Button>
+              <Button
+                asChild
+                variant={
+                  currentUrl === "/admin/events/all-events"
+                    ? "secondary"
+                    : "ghost"
+                }
+                className="w-full mb-1 justify-start transition-all hover:text-primary"
+              >
+                <Link href="/admin/events/all-events">
                   <CalendarSearch className="mr-2 h-4 w-4" />
-                  View all Events
-                </Button>
-              </Link>
+                  Manage Events
+                </Link>
+              </Button>
+              <Button
+                asChild
+                variant={
+                  currentUrl === "/admin/events/all-registrations"
+                    ? "secondary"
+                    : "ghost"
+                }
+                className="w-full mb-1 justify-start transition-all hover:text-primary"
+              >
+                <Link href="/admin/events/all-registrations">
+                  <Users className="mr-2 h-4 w-4" />
+                  Manage Registrations
+                </Link>
+              </Button>
+              <Button
+                asChild
+                variant={
+                  currentUrl === "/admin/events/winner" ? "secondary" : "ghost"
+                }
+                className="w-full mb-1 justify-start transition-all hover:text-primary"
+              >
+                <Link href="/admin/events/winner">
+                  <Trophy className="mr-2 h-4 w-4" />
+                  Declare Winner
+                </Link>
+              </Button>
             </div>
           </nav>
         </div>
