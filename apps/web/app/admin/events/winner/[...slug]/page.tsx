@@ -1,28 +1,26 @@
 import { Button } from "@repo/ui/components/ui/button";
 import Link from "next/link";
-import { Copy } from "lucide-react";
 import {
   Dialog,
   DialogClose,
   DialogContent,
-  DialogDescription,
   DialogFooter,
   DialogHeader,
   DialogTitle,
   DialogTrigger,
 } from "@repo/ui/components/ui/dialog";
-import { Input } from "@repo/ui/components/ui/input";
-import { Label } from "@repo/ui/components/ui/label";
-import WinnerDeclareForm from "../components/winner-declare-form";
+import WinnerDeclareForm from "../../components/winner-declare-form";
 
-export default function WinnersPage() {
+export default function WinnersPage({ params }: { params: { slug: string } }) {
+  const { slug } = params;
+
   return (
     <div className="flex flex-1 flex-col gap-4 px-4 lg:gap-6 lg:px-6">
       <div className="flex items-center justify-between">
         <h1 className="text-lg font-semibold md:text-2xl">Declare Winner</h1>
         <Button asChild variant={"outline"}>
           <Link
-            href="/admin/events/winner/previous"
+            href={`/admin/events/winner/${slug[0]}/previous`}
             className="hidden min-[475px]:block"
           >
             Previous Winners
@@ -81,7 +79,9 @@ export default function WinnersPage() {
               variant={"outline"}
               className="block min-[475px]:hidden"
             >
-              <Link href="/admin/events/winner/previous">Previous Winners</Link>
+              <Link href={`/admin/events/winner/${slug[0]}/previous`}>
+                Previous Winners
+              </Link>
             </Button>
           </div>
         </div>

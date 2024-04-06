@@ -75,18 +75,6 @@ export function Sidebar() {
                   Manage Registrations
                 </Link>
               </Button>
-              <Button
-                asChild
-                variant={
-                  currentUrl === "/admin/events/winner" ? "secondary" : "ghost"
-                }
-                className="w-full mb-1 justify-start transition-all hover:text-primary"
-              >
-                <Link href="/admin/events/winner">
-                  <Trophy className="mr-2 h-4 w-4" />
-                  Declare Winner
-                </Link>
-              </Button>
             </div>
           </nav>
         </div>

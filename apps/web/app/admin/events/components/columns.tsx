@@ -2,6 +2,7 @@
 import { ColumnDef } from "@tanstack/react-table";
 import { EventFormType as Event } from "@repo/types";
 import { ArrowUpDown, MoreHorizontal } from "lucide-react";
+import { convertToSlug } from "@repo/ui/lib/slug";
 
 import { Button } from "@repo/ui/components/ui/button";
 import {
@@ -18,6 +19,7 @@ import {
   SheetTitle,
   SheetTrigger,
 } from "@repo/ui/components/ui/sheet";
+import Link from "next/link";
 
 export const columns: ColumnDef<Event>[] = [
   {
@@ -88,8 +90,9 @@ export const columns: ColumnDef<Event>[] = [
   {
     id: "actions",
     cell: ({ row }) => {
-      const payment = row.original;
-
+      const event = row.original;
+      const slug = convertToSlug(event.eventName);
+      console.log(slug);
       return (
         <>
           <Sheet>
@@ -104,6 +107,11 @@ export const columns: ColumnDef<Event>[] = [
                 <SheetTrigger>
                   <DropdownMenuItem>More Details</DropdownMenuItem>
                 </SheetTrigger>
+                <DropdownMenuItem>
+                  <Link href={`/admin/events/winner/${slug}`}>
+                    Announce Winner
+                  </Link>
+                </DropdownMenuItem>
                 <DropdownMenuItem>Edit</DropdownMenuItem>
                 <DropdownMenuItem>Delete</DropdownMenuItem>
               </DropdownMenuContent>
