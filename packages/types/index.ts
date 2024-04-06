@@ -35,4 +35,32 @@ export const eventFormSchema = z.object({
   }),
 });
 
+export const WinnerDeclareFormSchema = z.object({
+  firstRankSIC: z.string().length(8, {
+    message: "SIC should be at least 8 character",
+  }),
+  secondRankSIC: z.string().length(8, {
+    message: "SIC should be at least 8 character",
+  }),
+  thirdRankSIC: z.string().length(8, {
+    message: "SIC should be at least 8 character",
+  }),
+});
+
+export const HonorableMentionFormSchema = z.object({
+  firstMentionSIC: z.string().length(8, {
+    message: "SIC should be at least 8 character",
+  }),
+  secondMentionSIC: z.string().length(8, {
+    message: "SIC should be at least 8 character",
+  }),
+  thirdMentionSIC: z.string().length(8, {
+    message: "SIC should be at least 8 character",
+  }),
+});
+
 export type EventFormType = z.infer<typeof eventFormSchema>;
+export type WinnerDeclareFormType = z.infer<typeof WinnerDeclareFormSchema>;
+export type HonorableMentionFormType = z.infer<
+  typeof HonorableMentionFormSchema
+>;

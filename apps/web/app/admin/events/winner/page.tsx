@@ -1,5 +1,19 @@
 import { Button } from "@repo/ui/components/ui/button";
 import Link from "next/link";
+import { Copy } from "lucide-react";
+import {
+  Dialog,
+  DialogClose,
+  DialogContent,
+  DialogDescription,
+  DialogFooter,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from "@repo/ui/components/ui/dialog";
+import { Input } from "@repo/ui/components/ui/input";
+import { Label } from "@repo/ui/components/ui/label";
+import WinnerDeclareForm from "../components/winner-declare-form";
 
 export default function WinnersPage() {
   return (
@@ -24,8 +38,44 @@ export default function WinnersPage() {
             Click on the button below to declare the winner of the event.
           </p>
           <div className="flex gap-4 items-center justify-center mt-4 flex-col min-[475px]:flex-row">
-            <Button>Grand Prize</Button>
-            <Button variant={"outline"}>Honorable Mentions</Button>
+            <Dialog>
+              <DialogTrigger asChild>
+                <Button>Grand Prize</Button>
+              </DialogTrigger>
+              <DialogContent className="sm:max-w-md">
+                <DialogHeader className="flex items-start text-start">
+                  <DialogTitle>Declare Winners</DialogTitle>
+                </DialogHeader>
+                <WinnerDeclareForm />
+                <DialogFooter className="justify-between gap-2 flex-row items-center">
+                  <DialogClose asChild>
+                    <Button type="button" variant="secondary">
+                      Close
+                    </Button>
+                  </DialogClose>
+                  <Button type="submit">Announce</Button>
+                </DialogFooter>
+              </DialogContent>
+            </Dialog>
+            <Dialog>
+              <DialogTrigger asChild>
+                <Button variant={"outline"}>Honorable Mentions</Button>
+              </DialogTrigger>
+              <DialogContent className="sm:max-w-md">
+                <DialogHeader className="flex items-start text-start">
+                  <DialogTitle>Declare Honorable Mentions</DialogTitle>
+                </DialogHeader>
+                <WinnerDeclareForm />
+                <DialogFooter className="justify-between gap-2 flex-row items-center">
+                  <DialogClose asChild>
+                    <Button type="button" variant="secondary">
+                      Close
+                    </Button>
+                  </DialogClose>
+                  <Button type="submit">Announce</Button>
+                </DialogFooter>
+              </DialogContent>
+            </Dialog>
             <Button
               asChild
               variant={"outline"}
