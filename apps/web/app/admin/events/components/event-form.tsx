@@ -56,7 +56,7 @@ const EventForm = () => {
 
   return (
     <Form {...form}>
-      <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
+      <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
         <FormField
           control={form.control}
           name="eventName"
@@ -83,7 +83,7 @@ const EventForm = () => {
             </FormItem>
           )}
         />
-        <div className="grid md:grid-cols-2 gap-8">
+        <div className="grid md:grid-cols-2 md:gap-8 gap-6">
           <FormField
             control={form.control}
             name="eventVenue"
@@ -139,7 +139,7 @@ const EventForm = () => {
             )}
           />
         </div>
-        <div className="grid md:grid-cols-2 gap-8">
+        <div className="grid md:grid-cols-2 md:gap-8 gap-6">
           <FormField
             control={form.control}
             name="eventStartDateTime"
@@ -219,7 +219,7 @@ const EventForm = () => {
             )}
           />
         </div>
-        <div className="grid md:grid-cols-2 gap-8">
+        <div className="grid md:grid-cols-2 md:gap-8 gap-6">
           <FormField
             control={form.control}
             name="isTeamEvent"
@@ -258,74 +258,14 @@ const EventForm = () => {
           control={form.control}
           name="contactMembersDetails"
           render={({ field }) => (
-            <FormItem>
-              <FormLabel>Contacts</FormLabel>
-              <div className="grid md:grid-cols-2 gap-8">
-                <div>
-                  <Select
-                    onValueChange={field.onChange}
-                    defaultValue={field.value}
-                  >
-                    <FormControl>
-                      <SelectTrigger>
-                        <SelectValue placeholder="Contact Person SIC" />
-                      </SelectTrigger>
-                    </FormControl>
-                    <SelectContent>
-                      <SelectItem value="est">
-                        Eastern Standard Time (EST)
-                      </SelectItem>
-                      <SelectItem value="cst">
-                        Central Standard Time (CST)
-                      </SelectItem>
-                      <SelectItem value="mst">
-                        Mountain Standard Time (MST)
-                      </SelectItem>
-                      <SelectItem value="pst">
-                        Pacific Standard Time (PST)
-                      </SelectItem>
-                      <SelectItem value="akst">
-                        Alaska Standard Time (AKST)
-                      </SelectItem>
-                      <SelectItem value="hst">
-                        Hawaii Standard Time (HST)
-                      </SelectItem>
-                    </SelectContent>
-                  </Select>
+            <FormItem className="flex flex-col">
+              <FormLabel>Contact Members</FormLabel>
+              <FormControl>
+                <div className="grid md:grid-cols-2 md:gap-8 gap-2">
+                  <Input placeholder="Enter first person's SIC" {...field} />
+                  <Input placeholder="Enter second person's SIC" {...field} />
                 </div>
-
-                <Select
-                  onValueChange={field.onChange}
-                  defaultValue={field.value}
-                >
-                  <FormControl>
-                    <SelectTrigger>
-                      <SelectValue placeholder="Contact Person SIC" />
-                    </SelectTrigger>
-                  </FormControl>
-                  <SelectContent>
-                    <SelectItem value="est">
-                      Eastern Standard Time (EST)
-                    </SelectItem>
-                    <SelectItem value="cst">
-                      Central Standard Time (CST)
-                    </SelectItem>
-                    <SelectItem value="mst">
-                      Mountain Standard Time (MST)
-                    </SelectItem>
-                    <SelectItem value="pst">
-                      Pacific Standard Time (PST)
-                    </SelectItem>
-                    <SelectItem value="akst">
-                      Alaska Standard Time (AKST)
-                    </SelectItem>
-                    <SelectItem value="hst">
-                      Hawaii Standard Time (HST)
-                    </SelectItem>
-                  </SelectContent>
-                </Select>
-              </div>
-
+              </FormControl>
               <FormMessage />
             </FormItem>
           )}

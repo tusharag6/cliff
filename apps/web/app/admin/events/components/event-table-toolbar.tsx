@@ -23,7 +23,7 @@ export function DataTableToolbar<TData>({
           onChange={(event) =>
             table.getColumn("eventName")?.setFilterValue(event.target.value)
           }
-          className="h-8 w-[150px] lg:w-[250px]"
+          className="h-10 sm:w-96 w-full"
         />
       </div>
       <DataTableViewOptions table={table} />
