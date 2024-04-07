@@ -19,10 +19,7 @@ export default function WinnersPage({ params }: { params: { slug: string } }) {
       <div className="flex items-center justify-between">
         <h1 className="text-lg font-semibold md:text-2xl">Declare Winner</h1>
         <Button asChild variant={"outline"}>
-          <Link
-            href={`/admin/events/winner/${slug[0]}/previous`}
-            className="hidden min-[475px]:block"
-          >
+          <Link href="" className="hidden min-[475px]:block">
             Previous Winners
           </Link>
         </Button>
@@ -79,9 +76,7 @@ export default function WinnersPage({ params }: { params: { slug: string } }) {
               variant={"outline"}
               className="block min-[475px]:hidden"
             >
-              <Link href={`/admin/events/winner/${slug[0]}/previous`}>
-                Previous Winners
-              </Link>
+              <Link href="">Previous Winners</Link>
             </Button>
           </div>
         </div>

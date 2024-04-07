@@ -1,5 +1,5 @@
 import React from "react";
-import RecentWinner from "../../../components/recent-winner";
+import RecentWinner from "../../components/recent-winner";
 import { Search } from "lucide-react";
 import { Input } from "@repo/ui/components/ui/input";
 
