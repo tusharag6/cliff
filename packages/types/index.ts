@@ -1,39 +1,95 @@
 import { z } from "zod";
-export const eventFormSchema = z.object({
-  eventName: z
-    .string()
-    .min(2, {
-      message: "Event name must be at least 2 characters.",
-    })
-    .max(50, {
-      message: "Event name must not be longer than 50 characters.",
+
+export const RegisteredTeamsSchema = z.object({
+  teamName: z.string().max(50, {
+    message: "Team name must not be longer than 50 characters.",
+  }),
+  idea: z.string().max(50, {
+    message: "Idea name must not be longer than 50 characters.",
+  }),
+  ideaDescription: z.string().max(1000, {
+    message: "Idea description must not be longer than 1000 characters.",
+  }),
+  teamMembers: z.array(
+    z.string().length(8, {
+      message: "SIC should be 8 characters long",
     }),
-  eventDescription: z.string().max(200, {
-    message: "Event description must not be longer than 200 characters.",
-  }),
-  eventStartDateTime: z.string({
-    required_error: "Please select a start date and time for the event.",
-  }),
-  eventFinishDateTime: z.string({
-    required_error: "Please select a finish date and time for the event.",
-  }),
-  eventVenue: z.string().max(100, {
-    message: "Event venue must not be longer than 100 characters.",
-  }),
-  organizedClub: z.string().max(50, {
-    message: "Please select the club organizing the event.",
-  }),
-  eventImage: z.string().url({
-    message: "Event image must be a valid URL.",
-  }),
-  contactMembersDetails: z.string().max(200, {
-    message: "Contact members must be selected.",
-  }),
-  isTeamEvent: z.boolean(),
-  maxTeamMembers: z.number().min(1, {
-    message: "Maximum team members must be at least 1.",
-  }),
+  ),
 });
+
+export const eventFormSchema = z
+  .object({
+    eventName: z
+      .string()
+      .min(2, {
+        message: "Event name must be at least 2 characters.",
+      })
+      .max(50, {
+        message: "Event name must not be longer than 50 characters.",
+      }),
+    eventDescription: z.string().max(200, {
+      message: "Event description must not be longer than 200 characters.",
+    }),
+    eventStartDateTime: z.string({
+      required_error: "Please select a start date and time for the event.",
+    }),
+    eventFinishDateTime: z.string({
+      required_error: "Please select a finish date and time for the event.",
+    }),
+    eventVenue: z.string().max(100, {
+      message: "Event venue must not be longer than 100 characters.",
+    }),
+    organizedClub: z.string().max(50, {
+      message: "Please select the club organizing the event.",
+    }),
+    eventImage: z.string().url({
+      message: "Event image must be a valid URL.",
+    }),
+    contactMembersDetails: z
+      .array(
+        z.string().length(8, { message: "SIC should be 8 characters long" }),
+      )
+      .max(2, { message: "Maximum of 2 contact members allowed." }),
+    isTeamEvent: z.boolean(),
+    maxTeamMembers: z.number().default(0),
+    registeredParticipants: z
+      .array(
+        z.string().length(8, { message: "SIC should be 8 characters long" }),
+      )
+      .optional(),
+    registeredTeams: z.array(RegisteredTeamsSchema).default([]),
+  })
+  .superRefine((formData, ctx) => {
+    if (formData.isTeamEvent) {
+      if (formData.maxTeamMembers === 0) {
+        ctx.addIssue({
+          code: z.ZodIssueCode.too_small,
+          minimum: 1,
+          type: "number",
+          inclusive: true,
+          message: "Please set a maximum number of team members.",
+        });
+      }
+      // Validate max members in each registered team
+      if (formData.registeredTeams.length > 0) {
+        formData.registeredTeams.forEach((team) => {
+          if (team.teamMembers.length > formData.maxTeamMembers) {
+            ctx.addIssue({
+              code: z.ZodIssueCode.too_big,
+              maximum: formData.maxTeamMembers,
+              type: "number",
+              inclusive: true,
+              message: "Team members should not exceed the maximum limit.",
+            });
+          }
+        });
+      }
+    } else {
+      formData.maxTeamMembers = 0;
+      formData.registeredTeams = [];
+    }
+    return formData;
+  });
 
 export const WinnerDeclareFormSchema = z.object({
   firstRankSIC: z.string().length(8, {
@@ -60,6 +116,7 @@ export const HonorableMentionFormSchema = z.object({
 });
 
 export type EventFormType = z.infer<typeof eventFormSchema>;
+export type RegisteredTeamsType = z.infer<typeof RegisteredTeamsSchema>;
 export type WinnerDeclareFormType = z.infer<typeof WinnerDeclareFormSchema>;
 export type HonorableMentionFormType = z.infer<
   typeof HonorableMentionFormSchema
