@@ -9,14 +9,13 @@ interface LayoutProps {
 export default function Layout({ children }: LayoutProps) {
   return (
     <>
-      <div className="grid min-h-screen w-full md:grid-cols-[220px_1fr] lg:grid-cols-[280px_1fr]">
-        <Sidebar />
-        <div className="flex flex-col">
+      <div className="relative">
+        <div className="absolute left-0 top-0 h-full md:w-56 lg:w-72">
+          <Sidebar />
+        </div>
+        <div className="flex flex-col md:ml-56 lg:ml-72">
           <Navbar />
-
-          <main className="flex flex-1 flex-col gap-4 p-4 lg:gap-6 lg:p-6">
-            {children}
-          </main>
+          <main className="">{children}</main>
         </div>
       </div>
     </>
