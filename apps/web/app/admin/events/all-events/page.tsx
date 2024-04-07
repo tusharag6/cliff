@@ -10,7 +10,8 @@ export const events: EventFormType[] = [
     eventFinishDateTime: "2024-09-23T18:00:00.000Z",
     eventVenue: "Moscone Center",
     organizedClub: "TechCrunch",
-    eventImage: "image1.jpg",
+    eventImage:
+      "https://www.shutterstock.com/image-photo/online-event-entertainment-concept-background-260nw-1731583732.jpg",
     contactMembersDetails: "Contact details for TechCrunch Disrupt SF 2024",
     isTeamEvent: true,
     maxTeamMembers: 4,
@@ -22,7 +23,8 @@ export const events: EventFormType[] = [
     eventFinishDateTime: "2024-11-04T17:00:00.000Z",
     eventVenue: "Altice Arena",
     organizedClub: "Web Summit",
-    eventImage: "image2.jpg",
+    eventImage:
+      "https://www.shutterstock.com/image-photo/online-event-entertainment-concept-background-260nw-1731583732.jpg",
     contactMembersDetails: "Contact details for Web Summit 2024",
     isTeamEvent: true,
     maxTeamMembers: 4,
@@ -34,7 +36,8 @@ export const events: EventFormType[] = [
     eventFinishDateTime: "2025-01-08T17:00:00.000Z",
     eventVenue: "Las Vegas Convention Center",
     organizedClub: "Consumer Technology Association",
-    eventImage: "image3.jpg",
+    eventImage:
+      "https://www.shutterstock.com/image-photo/online-event-entertainment-concept-background-260nw-1731583732.jpg",
     contactMembersDetails: "Contact details for CES 2025",
     isTeamEvent: true,
     maxTeamMembers: 4,
@@ -46,7 +49,8 @@ export const events: EventFormType[] = [
     eventFinishDateTime: "2025-03-16T18:00:00.000Z",
     eventVenue: "Austin Convention Center",
     organizedClub: "SXSW",
-    eventImage: "image4.jpg",
+    eventImage:
+      "https://www.shutterstock.com/image-photo/online-event-entertainment-concept-background-260nw-1731583732.jpg",
     contactMembersDetails: "Contact details for SXSW 2025",
     isTeamEvent: true,
     maxTeamMembers: 4,
@@ -58,7 +62,8 @@ export const events: EventFormType[] = [
     eventFinishDateTime: "2025-05-14T17:00:00.000Z",
     eventVenue: "Shoreline Amphitheatre",
     organizedClub: "Google",
-    eventImage: "image5.jpg",
+    eventImage:
+      "ihttps://www.shutterstock.com/image-photo/online-event-entertainment-concept-background-260nw-1731583732.jpg",
     contactMembersDetails: "Contact details for Google I/O 2025",
     isTeamEvent: true,
     maxTeamMembers: 4,
@@ -70,7 +75,8 @@ export const events: EventFormType[] = [
     eventFinishDateTime: "2025-06-12T17:00:00.000Z",
     eventVenue: "San Jose McEnery Convention Center",
     organizedClub: "Apple",
-    eventImage: "image6.jpg",
+    eventImage:
+      "ihttps://www.shutterstock.com/image-photo/online-event-entertainment-concept-background-260nw-1731583732.jpg",
     contactMembersDetails: "Contact details for WWDC 2025",
     isTeamEvent: true,
     maxTeamMembers: 4,
@@ -82,7 +88,8 @@ export const events: EventFormType[] = [
     eventFinishDateTime: "2025-06-17T18:00:00.000Z",
     eventVenue: "Los Angeles Convention Center",
     organizedClub: "Entertainment Software Association",
-    eventImage: "image7.jpg",
+    eventImage:
+      "ihttps://www.shutterstock.com/image-photo/online-event-entertainment-concept-background-260nw-1731583732.jpg",
     contactMembersDetails: "Contact details for E3 2025",
     isTeamEvent: true,
     maxTeamMembers: 4,
@@ -94,7 +101,8 @@ export const events: EventFormType[] = [
     eventFinishDateTime: "2025-07-20T17:00:00.000Z",
     eventVenue: "San Diego Convention Center",
     organizedClub: "Comic-Con International",
-    eventImage: "image8.jpg",
+    eventImage:
+      "ihttps://www.shutterstock.com/image-photo/online-event-entertainment-concept-background-260nw-1731583732.jpg",
     contactMembersDetails: "Contact details for Comic-Con International 2025",
     isTeamEvent: true,
     maxTeamMembers: 4,
@@ -106,7 +114,8 @@ export const events: EventFormType[] = [
     eventFinishDateTime: "2025-09-11T17:00:00.000Z",
     eventVenue: "Messe Berlin",
     organizedClub: "Consumer Electronics Unlimited",
-    eventImage: "image9.jpg",
+    eventImage:
+      "ihttps://www.shutterstock.com/image-photo/online-event-entertainment-concept-background-260nw-1731583732.jpg",
     contactMembersDetails: "Contact details for IFA Berlin 2025",
     isTeamEvent: true,
     maxTeamMembers: 4,
@@ -118,7 +127,8 @@ export const events: EventFormType[] = [
     eventFinishDateTime: "2025-09-23T18:00:00.000Z",
     eventVenue: "Makuhari Messe",
     organizedClub: "Computer Entertainment Supplier's Association",
-    eventImage: "image10.jpg",
+    eventImage:
+      "imhttps://www.shutterstock.com/image-photo/online-event-entertainment-concept-background-260nw-1731583732.jpg",
     contactMembersDetails: "Contact details for Tokyo Game Show 2025",
     isTeamEvent: true,
     maxTeamMembers: 4,
@@ -130,7 +140,8 @@ export const events: EventFormType[] = [
     eventFinishDateTime: "2026-09-10T17:00:00.000Z",
     eventVenue: "Messe Berlin",
     organizedClub: "Consumer Electronics Unlimited",
-    eventImage: "image11.jpg",
+    eventImage:
+      "imhttps://www.shutterstock.com/image-photo/online-event-entertainment-concept-background-260nw-1731583732.jpg",
     contactMembersDetails: "Contact details for IFA Berlin 2026",
     isTeamEvent: true,
     maxTeamMembers: 4,
@@ -142,7 +153,8 @@ export const events: EventFormType[] = [
     eventFinishDateTime: "2026-09-22T18:00:00.000Z",
     eventVenue: "Makuhari Messe",
     organizedClub: "Computer Entertainment Supplier's Association",
-    eventImage: "image12.jpg",
+    eventImage:
+      "imhttps://www.shutterstock.com/image-photo/online-event-entertainment-concept-background-260nw-1731583732.jpg",
     contactMembersDetails: "Contact details for Tokyo Game Show 2026",
     isTeamEvent: true,
     maxTeamMembers: 4,
@@ -154,7 +166,8 @@ export const events: EventFormType[] = [
     eventFinishDateTime: "2027-09-09T17:00:00.000Z",
     eventVenue: "Messe Berlin",
     organizedClub: "Consumer Electronics Unlimited",
-    eventImage: "image13.jpg",
+    eventImage:
+      "imhttps://www.shutterstock.com/image-photo/online-event-entertainment-concept-background-260nw-1731583732.jpg",
     contactMembersDetails: "Contact details for IFA Berlin 2027",
     isTeamEvent: true,
     maxTeamMembers: 4,
@@ -166,7 +179,8 @@ export const events: EventFormType[] = [
     eventFinishDateTime: "2027-09-21T18:00:00.000Z",
     eventVenue: "Makuhari Messe",
     organizedClub: "Computer Entertainment Supplier's Association",
-    eventImage: "image14.jpg",
+    eventImage:
+      "imhttps://www.shutterstock.com/image-photo/online-event-entertainment-concept-background-260nw-1731583732.jpg",
     contactMembersDetails: "Contact details for Tokyo Game Show 2027",
     isTeamEvent: true,
     maxTeamMembers: 4,
@@ -178,7 +192,8 @@ export const events: EventFormType[] = [
     eventFinishDateTime: "2028-09-07T17:00:00.000Z",
     eventVenue: "Messe Berlin",
     organizedClub: "Consumer Electronics Unlimited",
-    eventImage: "image15.jpg",
+    eventImage:
+      "imhttps://www.shutterstock.com/image-photo/online-event-entertainment-concept-background-260nw-1731583732.jpg",
     contactMembersDetails: "Contact details for IFA Berlin 2028",
     isTeamEvent: true,
     maxTeamMembers: 4,
@@ -190,7 +205,8 @@ export const events: EventFormType[] = [
     eventFinishDateTime: "2028-09-23T18:00:00.000Z",
     eventVenue: "Makuhari Messe",
     organizedClub: "Computer Entertainment Supplier's Association",
-    eventImage: "image16.jpg",
+    eventImage:
+      "imhttps://www.shutterstock.com/image-photo/online-event-entertainment-concept-background-260nw-1731583732.jpg",
     contactMembersDetails: "Contact details for Tokyo Game Show 2028",
     isTeamEvent: true,
     maxTeamMembers: 4,
@@ -202,7 +218,8 @@ export const events: EventFormType[] = [
     eventFinishDateTime: "2029-09-08T17:00:00.000Z",
     eventVenue: "Messe Berlin",
     organizedClub: "Consumer Electronics Unlimited",
-    eventImage: "image17.jpg",
+    eventImage:
+      "imhttps://www.shutterstock.com/image-photo/online-event-entertainment-concept-background-260nw-1731583732.jpg",
     contactMembersDetails: "Contact details for IFA Berlin 2029",
     isTeamEvent: true,
     maxTeamMembers: 4,
@@ -214,7 +231,8 @@ export const events: EventFormType[] = [
     eventFinishDateTime: "2029-09-22T18:00:00.000Z",
     eventVenue: "Makuhari Messe",
     organizedClub: "Computer Entertainment Supplier's Association",
-    eventImage: "image18.jpg",
+    eventImage:
+      "imhttps://www.shutterstock.com/image-photo/online-event-entertainment-concept-background-260nw-1731583732.jpg",
     contactMembersDetails: "Contact details for Tokyo Game Show 2029",
     isTeamEvent: true,
     maxTeamMembers: 4,
@@ -223,11 +241,16 @@ export const events: EventFormType[] = [
 
 export default async function DemoPage() {
   return (
-    <div className="container">
-      <h1 className="text-lg font-semibold md:text-2xl">All Events</h1>
-      <div className="pt-4">
-        <DataTable columns={columns} data={events} />
+    <div className="h-full flex-1 flex-col space-y-8 p-8 flex">
+      <div className="flex items-center justify-between space-y-2">
+        <div>
+          <h2 className="text-2xl font-bold tracking-tight">Welcome back!</h2>
+          <p className="text-muted-foreground">
+            Here&apos;s a list of your tasks for this month!
+          </p>
+        </div>
       </div>
+      <DataTable data={events} columns={columns} />
     </div>
   );
 }

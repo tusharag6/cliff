@@ -1,61 +1,55 @@
 "use client";
 import { ColumnDef } from "@tanstack/react-table";
 import { EventFormType as Event } from "@repo/types";
-import { ArrowUpDown, MoreHorizontal } from "lucide-react";
-import { convertToSlug } from "@repo/ui/lib/slug";
-
-import { Button } from "@repo/ui/components/ui/button";
-import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuTrigger,
-} from "@repo/ui/components/ui/dropdown-menu";
-import {
-  Sheet,
-  SheetContent,
-  SheetDescription,
-  SheetHeader,
-  SheetTitle,
-  SheetTrigger,
-} from "@repo/ui/components/ui/sheet";
-import Link from "next/link";
+import { Badge } from "@repo/ui/components/ui/badge";
+import { DataTableColumnHeader } from "./event-table-column-header";
+import { DataTableRowActions } from "./event-table-row-actions";
 
 export const columns: ColumnDef<Event>[] = [
   {
     accessorKey: "eventName",
-    header: "Event Name",
+    header: ({ column }) => (
+      <DataTableColumnHeader column={column} title="Event Name" />
+    ),
+    cell: ({ row }) => {
+      return (
+        <div className="max-w-[500px] truncate font-medium">
+          {row.getValue("eventName")}
+        </div>
+      );
+    },
+    enableHiding: false,
   },
   {
     accessorKey: "organizedClub",
-    header: ({ column }) => {
+    header: ({ column }) => (
+      <DataTableColumnHeader column={column} title="Club" />
+    ),
+    cell: ({ row }) => {
       return (
-        <Button
-          variant="ghost"
-          onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
-        >
-          Club
-          <ArrowUpDown className="h-4 w-4" />
-        </Button>
+        <div className="max-w-[100px] truncate font-medium">
+          {row.getValue("organizedClub")}
+        </div>
       );
     },
   },
   {
     accessorKey: "eventVenue",
-    header: "Venue",
+    header: ({ column }) => (
+      <DataTableColumnHeader column={column} title="Venue" />
+    ),
+    cell: ({ row }) => {
+      return (
+        <div className="max-w-[100px] truncate font-medium">
+          {row.getValue("eventVenue")}
+        </div>
+      );
+    },
   },
   {
     accessorKey: "eventStartDateTime",
     header: ({ column }) => {
-      return (
-        <Button
-          variant="ghost"
-          onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
-        >
-          Date
-          <ArrowUpDown className="h-4 w-4" />
-        </Button>
-      );
+      <DataTableColumnHeader column={column} title="Start Date" />;
     },
     cell: ({ row }) => {
       const date = new Date(row.getValue("eventStartDateTime"));
@@ -64,12 +58,16 @@ export const columns: ColumnDef<Event>[] = [
       const formatted = `${day}${
         day === 1 ? "st" : day === 2 ? "nd" : day === 3 ? "rd" : "th"
       } ${month}`;
-      return <span>{formatted}</span>;
+      return (
+        <div className="max-w-[100px] truncate font-medium">{formatted}</div>
+      );
     },
   },
   {
     accessorKey: "eventFinishDateTime",
-    header: "Status",
+    header: ({ column }) => {
+      <DataTableColumnHeader column={column} title="Status" />;
+    },
     cell: ({ row }) => {
       const startDate = new Date(row.getValue("eventStartDateTime"));
       const endDate = new Date(row.getValue("eventFinishDateTime"));
@@ -84,50 +82,13 @@ export const columns: ColumnDef<Event>[] = [
         status = "Ongoing";
       }
 
-      return <span>{status}</span>;
+      <div className="max-w-[100px] truncate font-medium">
+        {status && <Badge variant="outline">{status}</Badge>}
+      </div>;
     },
   },
   {
     id: "actions",
-    cell: ({ row }) => {
-      const event = row.original;
-      const slug = convertToSlug(event.eventName);
-      console.log(slug);
-      return (
-        <>
-          <Sheet>
-            <DropdownMenu>
-              <DropdownMenuTrigger asChild>
-                <Button variant="ghost" className="h-8 w-8 p-0">
-                  <span className="sr-only">Open menu</span>
-                  <MoreHorizontal className="h-4 w-4" />
-                </Button>
-              </DropdownMenuTrigger>
-              <DropdownMenuContent align="end">
-                <SheetTrigger>
-                  <DropdownMenuItem>More Details</DropdownMenuItem>
-                </SheetTrigger>
-                <DropdownMenuItem>
-                  <Link href={`/admin/events/winner/${slug}`}>
-                    Announce Winner
-                  </Link>
-                </DropdownMenuItem>
-                <DropdownMenuItem>Edit</DropdownMenuItem>
-                <DropdownMenuItem>Delete</DropdownMenuItem>
-              </DropdownMenuContent>
-            </DropdownMenu>
-            <SheetContent>
-              <SheetHeader>
-                <SheetTitle>Are you absolutely sure?</SheetTitle>
-                <SheetDescription>
-                  This action cannot be undone. This will permanently delete
-                  your account and remove your data from our servers.
-                </SheetDescription>
-              </SheetHeader>
-            </SheetContent>
-          </Sheet>
-        </>
-      );
-    },
+    cell: ({ row }) => <DataTableRowActions row={row} />,
   },
 ];
