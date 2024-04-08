@@ -9,6 +9,7 @@ import {
 } from "@repo/ui/components/ui/dropdown-menu";
 import {
   Sheet,
+  SheetClose,
   SheetContent,
   SheetTrigger,
 } from "@repo/ui/components/ui/sheet";
@@ -39,20 +40,26 @@ const Navbar = () => {
               <AccordionItem value="item-1" className="border-b-0">
                 <AccordionTrigger className="pb-1">Events</AccordionTrigger>
                 <AccordionContent className="p-0">
-                  <Button
-                    asChild
-                    variant={"link"}
-                    className="w-full justify-start transition-all hover:text-primary"
-                  >
-                    <Link href="/admin/events/create">Add New Event</Link>
-                  </Button>
-                  <Button
-                    asChild
-                    variant={"link"}
-                    className="w-full justify-start transition-all hover:text-primary"
-                  >
-                    <Link href="/admin/events/all-events">View all Events</Link>
-                  </Button>
+                  <SheetClose asChild>
+                    <Button
+                      asChild
+                      variant={"link"}
+                      className="w-full justify-start transition-all hover:text-primary"
+                    >
+                      <Link href="/admin/events/create">Add New Event</Link>
+                    </Button>
+                  </SheetClose>
+                  <SheetClose asChild>
+                    <Button
+                      asChild
+                      variant={"link"}
+                      className="w-full justify-start transition-all hover:text-primary"
+                    >
+                      <Link href="/admin/events/all-events">
+                        View all Events
+                      </Link>
+                    </Button>
+                  </SheetClose>
                 </AccordionContent>
               </AccordionItem>
             </Accordion>

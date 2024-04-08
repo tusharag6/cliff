@@ -60,7 +60,7 @@ export function Sidebar() {
                   Manage Events
                 </Link>
               </Button>
-              <Button
+              {/* <Button
                 asChild
                 variant={
                   currentUrl === "/admin/events/all-registrations"
@@ -73,7 +73,7 @@ export function Sidebar() {
                   <Users className="mr-2 h-4 w-4" />
                   Manage Registrations
                 </Link>
-              </Button>
+              </Button> */}
             </div>
           </nav>
         </div>
