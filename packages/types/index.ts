@@ -115,9 +115,38 @@ export const HonorableMentionFormSchema = z.object({
   }),
 });
 
+export const AccountFormSchema = z.object({
+  name: z
+    .string()
+    .min(2, {
+      message: "Name must be at least 2 characters.",
+    })
+    .max(30, {
+      message: "Name must not be longer than 30 characters.",
+    }),
+  dob: z.date({
+    required_error: "A date of birth is required.",
+  }),
+  language: z.string({
+    required_error: "Please select a language.",
+  }),
+});
+
+export const AppearanceFormSchema = z.object({
+  theme: z.enum(["light", "dark"], {
+    required_error: "Please select a theme.",
+  }),
+  font: z.enum(["inter", "manrope", "system"], {
+    invalid_type_error: "Select a font",
+    required_error: "Please select a font.",
+  }),
+});
+
 export type EventFormType = z.infer<typeof eventFormSchema>;
 export type RegisteredTeamsType = z.infer<typeof RegisteredTeamsSchema>;
 export type WinnerDeclareFormType = z.infer<typeof WinnerDeclareFormSchema>;
 export type HonorableMentionFormType = z.infer<
   typeof HonorableMentionFormSchema
 >;
+export type AccountFormType = z.infer<typeof AccountFormSchema>;
+export type AppearanceFormType = z.infer<typeof AppearanceFormSchema>;
