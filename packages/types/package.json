@@ -6,6 +6,7 @@
     ".": "./index.ts"
   },
   "dependencies": {
-    "typescript": "latest"
+    "typescript": "^5.4.3",
+    "zod": "^3.22.4"
   }
 }
