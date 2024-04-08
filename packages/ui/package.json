@@ -38,6 +38,7 @@
     "date-fns": "^3.6.0",
     "embla-carousel-react": "^8.0.0",
     "lucide-react": "^0.314.0",
+    "next-themes": "^0.3.0",
     "react-day-picker": "^8.10.0",
     "react-hook-form": "^7.51.2",
     "tailwind-merge": "^2.2.1",
@@ -50,6 +51,7 @@
     "./tailwind.config": "./tailwind.config.ts",
     "./lib/*": "./src/lib/*.ts",
     "./components/*": "./src/components/*.tsx",
-    "./use-toast": "./src/components/ui/use-toast.ts"
+    "./use-toast": "./src/components/ui/use-toast.ts",
+    "./theme-provider": "./src/components/ui/theme-provider.tsx"
   }
 }
