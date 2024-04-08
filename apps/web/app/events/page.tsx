@@ -25,61 +25,61 @@ const Page = () => {
         </div>
       </div>
 
-      <div className="hidden md:block pt-2 text-sm font-medium text-center text-gray-500 border-b border-gray-200 dark:text-gray-400 dark:border-gray-700">
-        <ul className="flex flex-wrap -mb-px">
-          <li className="me-2">
-            <Link
-              href="#"
-              className="pl-0 inline-block p-4 border-b-2 border-transparent rounded-t-lg hover:text-gray-600 hover:border-gray-300 dark:hover:text-gray-300"
-            >
-              Today
-            </Link>
-          </li>
-          <li className="me-2">
-            <Link
-              href="#"
-              className="inline-block p-4 border-b-2 border-transparent rounded-t-lg hover:text-gray-600 hover:border-gray-300 dark:hover:text-gray-300"
-            >
-              Tomorrow
-            </Link>
-          </li>
-          <li className="me-2">
-            <Link
-              href="#"
-              className="inline-block p-4 border-b-2 border-transparent rounded-t-lg hover:text-gray-600 hover:border-gray-300 dark:hover:text-gray-300"
-            >
-              This Weekend
-            </Link>
-          </li>
-          <li className="me-2">
-            <Link
-              href="#"
-              className="inline-block p-4 border-b-2 border-transparent rounded-t-lg hover:text-gray-600 hover:border-gray-300 dark:hover:text-gray-300"
-            >
-              This Week
-            </Link>
-          </li>
-          <li className="me-2">
-            <Link
-              href="#"
-              className="inline-block p-4 text-blue-600 border-b-2 border-blue-600 rounded-t-lg active dark:text-blue-500 dark:border-blue-500"
-              aria-current="page"
-            >
-              All Dates
-            </Link>
-          </li>
-        </ul>
-      </div>
-
       <div>
-        <h3 className="text-xl font-bold tracking-tight py-4">
+        <h3 className="text-xl font-bold tracking-tight pt-4">
           Featured Events
         </h3>
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-2 py-4">
-          {products.map((product, index) => (
-            <EventCard key={index} />
-          ))}
+        <div className="hidden md:block text-sm font-medium text-center text-gray-500 border-b border-gray-200 dark:text-gray-400 dark:border-gray-700">
+          <ul className="flex flex-wrap -mb-px">
+            <li className="me-2">
+              <Link
+                href="#"
+                className="pl-0 inline-block p-4 border-b-2 border-transparent rounded-t-lg hover:text-gray-600 hover:border-gray-300 dark:hover:text-gray-300"
+              >
+                Today
+              </Link>
+            </li>
+            <li className="me-2">
+              <Link
+                href="#"
+                className="inline-block p-4 border-b-2 border-transparent rounded-t-lg hover:text-gray-600 hover:border-gray-300 dark:hover:text-gray-300"
+              >
+                Tomorrow
+              </Link>
+            </li>
+            <li className="me-2">
+              <Link
+                href="#"
+                className="inline-block p-4 border-b-2 border-transparent rounded-t-lg hover:text-gray-600 hover:border-gray-300 dark:hover:text-gray-300"
+              >
+                This Weekend
+              </Link>
+            </li>
+            <li className="me-2">
+              <Link
+                href="#"
+                className="inline-block p-4 border-b-2 border-transparent rounded-t-lg hover:text-gray-600 hover:border-gray-300 dark:hover:text-gray-300"
+              >
+                This Week
+              </Link>
+            </li>
+            <li className="me-2">
+              <Link
+                href="#"
+                className="inline-block p-4 text-blue-600 border-b-2 border-blue-600 rounded-t-lg active dark:text-blue-500 dark:border-blue-500"
+                aria-current="page"
+              >
+                All Dates
+              </Link>
+            </li>
+          </ul>
         </div>
+      </div>
+
+      <div className="grid grid-cols-1 min-[475px]:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-3 py-4">
+        {products.map((product, index) => (
+          <EventCard key={index} />
+        ))}
       </div>
 
       <div>
