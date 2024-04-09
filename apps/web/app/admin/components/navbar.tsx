@@ -92,8 +92,10 @@ const Navbar = () => {
             Profile
           </DropdownMenuItem>
           <DropdownMenuItem>
-            <Settings className="pr-2" />
-            Settings
+            <Link href="/settings" className="flex items-center">
+              <Settings className="pr-2 text-muted-foreground" />
+              <span>Settings</span>
+            </Link>
           </DropdownMenuItem>
           <DropdownMenuSeparator />
           <DropdownMenuItem>
