@@ -1,5 +1,6 @@
 "use client";
 import React, { useEffect, useState } from "react";
+import "./styles.css";
 import { Spotlight } from "@repo/ui/components/ui/spotlight";
 import { BentoGrid, BentoGridItem } from "@repo/ui/components/ui/bento-grid";
 import { BackgroundBeams } from "@repo/ui/components/ui/background-beams";
