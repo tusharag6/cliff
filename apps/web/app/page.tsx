@@ -1,10 +1,11 @@
 "use client";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Spotlight } from "@repo/ui/components/ui/spotlight";
 import { BentoGrid, BentoGridItem } from "@repo/ui/components/ui/bento-grid";
 import { BackgroundBeams } from "@repo/ui/components/ui/background-beams";
 import { Button } from "@repo/ui/components/ui/hero-button";
 import { Compass, Download, Mail } from "lucide-react";
+import Navbar from "./navbar";
 
 const Skeleton = () => (
   <div className="flex flex-1 w-full h-full min-h-[6rem] rounded-xl bg-gradient-to-br from-neutral-900 to-neutral-800"></div>
@@ -40,18 +41,35 @@ const items = [
 ];
 
 export default function Page() {
+  const [hideNavbar, setHideNavbar] = useState(false);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      const currentScrollPos = window.pageYOffset;
+      const isNavbarHidden = currentScrollPos > 50; // You can adjust the value as needed
+
+      setHideNavbar(isNavbarHidden);
+    };
+
+    window.addEventListener("scroll", handleScroll);
+
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    };
+  }, []);
   return (
     <main className="bg-black">
       {/* Navbar */}
-
+      <div
+        className={`fixed top-0 z-10 w-full transition-opacity ${hideNavbar ? "opacity-0 -translate-y-full" : ""}`}
+      >
+        <Navbar />
+      </div>
       {/* Hero Section */}
       <div className="relative overflow-hidden h-[40rem] flex md:items-center md:justify-center antialiased w-full bg-black/[0.96] bg-[linear-gradient(to_right,#80808012_1px,transparent_1px),linear-gradient(to_bottom,#80808012_1px,transparent_1px)] bg-[size:48px_48px]">
-        <Spotlight
-          className="-top-40 left-0 md:left-60 md:-top-20"
-          fill="white"
-        />
+        <Spotlight className="left-60 -top-20" fill="white" />
         <div className="absolute pointer-events-none inset-0 flex items-center justify-center bg-black/[0.96] [mask-image:radial-gradient(ellipse_at_center,transparent_20%,black)]"></div>
-        <div className=" p-4 max-w-7xl  mx-auto relative z-10  w-full pt-20 md:pt-0 flex flex-col justify-center items-center">
+        <div className=" p-4 max-w-6xl  mx-auto relative z-10  w-full pt-20 md:pt-0 flex flex-col justify-center items-center">
           <h1 className="text-4xl md:text-7xl font-bold text-center bg-clip-text text-transparent bg-gradient-to-b from-neutral-50 to-neutral-400 bg-opacity-50">
             {/* Elevate Your Campus Experience */}
             Supercharge Your Campus Life!
@@ -75,7 +93,7 @@ export default function Page() {
             <Button
               variant={"outline"}
               size={"lg"}
-              className="py-1.5 px-8 h-10 rounded-sm"
+              className="py-1.5 px-8 h-10 rounded-sm text-white"
             >
               Download App <Download className="pl-2" />
             </Button>
@@ -85,7 +103,7 @@ export default function Page() {
 
       {/* Features Section */}
       <div>
-        <div className="p-4 max-w-7xl mx-auto relative z-10 w-full pb-12">
+        <div className="p-4 max-w-6xl mx-auto relative z-10 w-full pb-12">
           <h1 className="text-3xl font-extrabold text-center bg-clip-text text-transparent bg-gradient-to-b from-neutral-50 to-neutral-400 bg-opacity-50">
             Check Out What We've Got!
           </h1>
@@ -108,8 +126,8 @@ export default function Page() {
 
       {/* Contact Us */}
       <div className="h-[30rem] w-full rounded-md bg-black relative flex items-center justify-center antialiased">
-        <div className="flex justify-between items-center max-w-5xl space-x-40">
-          <div className="p-4 max-w-lg">
+        <div className="flex justify-between items-center max-w-7xl space-x-40">
+          <div className="p-4 max-w-3xl">
             <h1 className="relative z-10 text-2xl font-extrabold  bg-clip-text  text-neutral-50 ">
               Be First in Line for the Fun!
             </h1>
