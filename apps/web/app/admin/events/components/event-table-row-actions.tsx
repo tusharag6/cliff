@@ -52,6 +52,7 @@ export function DataTableRowActions<TData>({
           <DropdownMenuItem>
             <Link href={`/admin/events/winner/${slug}`}>Announce Winner</Link>
           </DropdownMenuItem>
+          <DropdownMenuItem>Attendee List</DropdownMenuItem>
           <DropdownMenuItem>Edit</DropdownMenuItem>
           <DropdownMenuItem>Delete</DropdownMenuItem>
         </DropdownMenuContent>

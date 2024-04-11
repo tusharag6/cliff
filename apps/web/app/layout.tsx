@@ -1,6 +1,8 @@
+import { ThemeProvider } from "@repo/ui/components/theme-provider";
 import "@repo/ui/globals.css";
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
+import NextTopLoader from "nextjs-toploader";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -16,7 +18,25 @@ export default function RootLayout({
 }): JSX.Element {
   return (
     <html lang="en">
-      <body className={inter.className}>{children}</body>
+      <body className={inter.className}>
+        <ThemeProvider
+          attribute="class"
+          defaultTheme="system"
+          themes={[
+            "light",
+            "dark",
+            "orangeLight",
+            "orangeDark",
+            "roseLight",
+            "roseDark",
+          ]}
+          enableSystem
+          disableTransitionOnChange
+        >
+          <NextTopLoader />
+          {children}
+        </ThemeProvider>
+      </body>
     </html>
   );
 }

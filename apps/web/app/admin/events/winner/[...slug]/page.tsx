@@ -15,7 +15,7 @@ export default function WinnersPage({ params }: { params: { slug: string } }) {
   const { slug } = params;
 
   return (
-    <div className="flex flex-1 flex-col gap-4 px-4 lg:gap-6 lg:px-6">
+    <div className="flex flex-1 flex-col gap-4 p-8 lg:gap-6 lg:px-6">
       <div className="flex items-center justify-between">
         <h1 className="text-lg font-semibold md:text-2xl">Declare Winner</h1>
         <Button asChild variant={"outline"}>
@@ -24,7 +24,7 @@ export default function WinnersPage({ params }: { params: { slug: string } }) {
           </Link>
         </Button>
       </div>
-      <div className="flex flex-1 items-center justify-center rounded-lg border border-dashed shadow-sm px-4 sm:px-0">
+      <div className="flex flex-1 items-center justify-center min-h-[80vh] rounded-lg border border-dashed shadow-sm px-4 sm:px-0">
         <div className="flex flex-col items-center gap-1 text-center">
           <h3 className="text-2xl font-bold tracking-tight">
             Want to declare a winner?
