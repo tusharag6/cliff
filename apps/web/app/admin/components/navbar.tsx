@@ -20,7 +20,14 @@ import {
   AccordionTrigger,
 } from "@repo/ui/components/ui/accordion";
 
-import { CircleUser, LogOut, Menu, Settings, Shield, User } from "lucide-react";
+import {
+  CalendarCheck,
+  CircleUser,
+  LogOut,
+  Menu,
+  Settings,
+  Shield,
+} from "lucide-react";
 import Link from "next/link";
 import React from "react";
 
@@ -88,8 +95,10 @@ const Navbar = () => {
             </Link>
           </DropdownMenuItem>
           <DropdownMenuItem>
-            <User className="pr-2" />
-            Profile
+            <Link href="/profile/bookings" className="flex items-center">
+              <CalendarCheck className="pr-2 text-muted-foreground" />
+              <span>Event Bookings</span>
+            </Link>
           </DropdownMenuItem>
           <DropdownMenuItem>
             <Link href="/settings" className="flex items-center">

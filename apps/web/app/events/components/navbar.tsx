@@ -1,6 +1,7 @@
 import React from "react";
 import Link from "next/link";
 import {
+  CalendarCheck,
   CircleUser,
   LogOut,
   Menu,
@@ -8,7 +9,6 @@ import {
   Search,
   Settings,
   Shield,
-  User,
 } from "lucide-react";
 
 import { Button } from "@repo/ui/components/ui/button";
@@ -107,8 +107,10 @@ const Navbar = () => {
               </Link>
             </DropdownMenuItem>
             <DropdownMenuItem>
-              <User className="pr-2" />
-              Profile
+              <Link href="/profile/bookings" className="flex items-center">
+                <CalendarCheck className="pr-2 text-muted-foreground" />
+                <span>Event Bookings</span>
+              </Link>
             </DropdownMenuItem>
             <DropdownMenuItem>
               <Link href="/settings" className="flex items-center">
