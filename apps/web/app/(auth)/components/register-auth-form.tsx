@@ -1,21 +1,27 @@
 "use client";
 
 import * as React from "react";
-
+import { zodResolver } from "@hookform/resolvers/zod";
+import { useForm } from "react-hook-form";
 import { cn } from "@repo/ui/lib/utils";
-import { Icons } from "@repo/ui/components/icons";
 import { Button } from "@repo/ui/components/ui/button";
 import { Input } from "@repo/ui/components/ui/input";
-import { Label } from "@repo/ui/components/ui/label";
-import { useRouter } from "next/navigation";
+import { SignUpSchema, SignUpType } from "@repo/types";
 import {
-  createUserWithEmailAndPassword,
-  signInWithPopup,
-  GoogleAuthProvider,
-} from "firebase/auth";
-import auth from "../../../../../packages/firebase-config/client";
-import toast from "react-hot-toast";
-import type { AuthError } from "firebase/auth";
+  Form,
+  FormControl,
+  FormField,
+  FormItem,
+  FormLabel,
+  FormMessage,
+} from "@repo/ui/components/ui/form";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@repo/ui/components/ui/select";
 
 interface RegisterAuthFormProps extends React.HTMLAttributes<HTMLDivElement> {}
 
@@ -23,129 +29,140 @@ export function RegisterAuthForm({
   className,
   ...props
 }: RegisterAuthFormProps) {
-  const [isLoadingEmail, setIsLoadingEmail] = React.useState<boolean>(false);
-  const [isLoadingGoogle, setIsLoadingGoogle] = React.useState<boolean>(false);
-  const [email, setEmail] = React.useState("");
-  const [password, setPassword] = React.useState("");
-  const router = useRouter();
+  const defaultValues: Partial<SignUpType> = {};
 
-  async function onSubmit(event: React.SyntheticEvent) {
-    event.preventDefault();
-    setIsLoadingEmail(true);
+  const form = useForm<SignUpType>({
+    resolver: zodResolver(SignUpSchema),
+    defaultValues,
+  });
 
-    try {
-      const res = await createUserWithEmailAndPassword(auth, email, password);
-      setEmail("");
-      setPassword("");
-      if (res.user) {
-        toast.success("Login Sucessfully!");
-      }
-    } catch (error) {
-      const authError = error as AuthError;
-      if (authError.code === "auth/invalid-credential") {
-        toast.error("Invalid Credentials! Please try again.");
-      } else if (authError.code === "auth/user-not-found") {
-        toast("You are not registered yet! Please register first.", {
-          icon: "🚫",
-        });
-      } else {
-        toast.error("Some Error Occured, please try again!");
-      }
-    }
-    setIsLoadingEmail(false);
-  }
-
-  async function signInWithGoogle() {
-    setIsLoadingGoogle(true);
-    try {
-      console.log(auth);
-      const provider = new GoogleAuthProvider();
-      const res = await signInWithPopup(auth, provider);
-      if (res.user) {
-        toast.success("Login Sucessfully!");
-      }
-    } catch (error) {
-      const authError = error as AuthError;
-      if (authError.code === "auth/invalid-credential") {
-        toast.error("Invalid Credentials! Please try again.");
-      } else if (authError.code === "auth/user-not-found") {
-        toast("You are not registered yet! Please register first.", {
-          icon: "🚫",
-        });
-      } else {
-        toast.error("Some Error Occured, please try again!");
-      }
-    }
-    setIsLoadingGoogle(false);
+  async function onSubmit(values: SignUpType) {
+    console.log(values);
   }
 
   return (
     <div className={cn("grid gap-6", className)} {...props}>
-      <form onSubmit={onSubmit}>
-        <div className="grid gap-2">
-          <div className="grid gap-1">
-            <Label className="sr-only" htmlFor="email">
-              Email
-            </Label>
-            <Input
-              id="email"
-              placeholder="Enter your email address"
-              type="email"
-              autoCapitalize="none"
-              autoComplete="email"
-              autoCorrect="off"
-              disabled={isLoadingEmail || isLoadingGoogle}
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-            />
-          </div>
-          <div className="grid gap-1">
-            <Label className="sr-only" htmlFor="password">
-              Password
-            </Label>
-            <Input
-              id="password"
-              placeholder="Enter your password"
-              type="password"
-              autoCapitalize="none"
-              autoComplete="password"
-              autoCorrect="off"
-              disabled={isLoadingEmail || isLoadingGoogle}
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-            />
-          </div>
-          <Button disabled={isLoadingEmail || isLoadingGoogle}>
-            {isLoadingEmail && (
-              <Icons.spinner className="mr-2 h-4 w-4 animate-spin" />
+      <Form {...form}>
+        <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
+          <FormField
+            control={form.control}
+            name="userName"
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel>Name</FormLabel>
+                <FormControl>
+                  <Input placeholder="Name" {...field} />
+                </FormControl>
+                <FormMessage />
+              </FormItem>
             )}
-            Register
-          </Button>
-        </div>
-      </form>
-      <div className="relative">
-        <div className="absolute inset-0 flex items-center">
-          <span className="w-full border-t" />
-        </div>
-        <div className="relative flex justify-center text-xs uppercase">
-          <span className="bg-background px-2 text-muted-foreground">
-            Or continue with
-          </span>
-        </div>
-      </div>
-      <Button
-        variant="outline"
-        type="button"
-        disabled={isLoadingEmail || isLoadingGoogle}
-        onClick={signInWithGoogle}
-      >
-        {isLoadingGoogle ? (
-          <Icons.spinner className="mr-2 h-4 w-4 animate-spin" />
-        ) : (
-          <Icons.google className="mr-2 h-4 w-4" />
-        )}{" "}
-        Google
-      </Button>
+          />
+          <FormField
+            control={form.control}
+            name="email"
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel>Email</FormLabel>
+                <FormControl>
+                  <Input placeholder="Email" type="email" {...field} />
+                </FormControl>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+          <FormField
+            control={form.control}
+            name="sic"
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel>SIC Number</FormLabel>
+                <FormControl>
+                  <Input placeholder="SIC Number" {...field} />
+                </FormControl>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+          <FormField
+            control={form.control}
+            name="branch"
+            render={({ field }) => (
+              <FormItem className="flex flex-col">
+                <FormLabel>Branch</FormLabel>
+                <Select
+                  onValueChange={field.onChange}
+                  defaultValue={field.value}
+                >
+                  <FormControl>
+                    <SelectTrigger>
+                      <SelectValue placeholder="Select your Branch" />
+                    </SelectTrigger>
+                  </FormControl>
+                  <SelectContent>
+                    <SelectItem value="cse">
+                      Computer Science Engineering
+                    </SelectItem>
+                    <SelectItem value="cst">
+                      Computer Science and Technology
+                    </SelectItem>
+                    <SelectItem value="cen">Computer Engineering</SelectItem>
+                    <SelectItem value="ece">
+                      Electronics and Communication Engineering
+                    </SelectItem>
+                    <SelectItem value="eee">
+                      Electrical and Electronics Engineering
+                    </SelectItem>
+                    <SelectItem value="eie">
+                      Electronics and Instrumentation Engineering
+                    </SelectItem>
+                  </SelectContent>
+                </Select>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+          <FormField
+            control={form.control}
+            name="year"
+            render={({ field }) => (
+              <FormItem className="flex flex-col">
+                <FormLabel>Year</FormLabel>
+                <Select
+                  onValueChange={field.onChange}
+                  defaultValue={field.value}
+                >
+                  <FormControl>
+                    <SelectTrigger>
+                      <SelectValue placeholder="Select your year" />
+                    </SelectTrigger>
+                  </FormControl>
+                  <SelectContent>
+                    <SelectItem value="first">First Year</SelectItem>
+                    <SelectItem value="second">Second Year</SelectItem>
+                    <SelectItem value="third">Third Year</SelectItem>
+                    <SelectItem value="fourth">Fourth Year</SelectItem>
+                  </SelectContent>
+                </Select>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+          <FormField
+            control={form.control}
+            name="password"
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel>Password</FormLabel>
+                <FormControl>
+                  <Input placeholder="Password" type="password" {...field} />
+                </FormControl>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+          <Button type="submit">Sign Up</Button>
+        </form>
+      </Form>
     </div>
   );
 }

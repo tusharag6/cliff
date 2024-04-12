@@ -1,5 +1,23 @@
 import { z } from "zod";
 
+export const SignUpSchema = z.object({
+  userName: z.string().min(2),
+  sic: z.string().length(8, {
+    message: "SIC should be 8 characters long",
+  }),
+  branch: z.string().min(3),
+  year: z.string().length(1),
+  phoneNumber: z.string().length(10, {
+    message: "Phone number should be 10 characters long",
+  }),
+  email: z.string().email({
+    message: "Please enter a valid email address.",
+  }),
+  password: z.string().min(6, {
+    message: "Password must be at least 6 characters.",
+  }),
+});
+
 export const RegisteredTeamsSchema = z.object({
   teamName: z.string().max(50, {
     message: "Team name must not be longer than 50 characters.",
@@ -142,6 +160,7 @@ export const AppearanceFormSchema = z.object({
   }),
 });
 
+export type SignUpType = z.infer<typeof SignUpSchema>;
 export type EventFormType = z.infer<typeof eventFormSchema>;
 export type RegisteredTeamsType = z.infer<typeof RegisteredTeamsSchema>;
 export type WinnerDeclareFormType = z.infer<typeof WinnerDeclareFormSchema>;
