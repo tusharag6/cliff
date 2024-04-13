@@ -29,14 +29,20 @@ export function RegisterAuthForm({
   className,
   ...props
 }: RegisterAuthFormProps) {
-  const defaultValues: Partial<SignUpType> = {};
-
   const form = useForm<SignUpType>({
     resolver: zodResolver(SignUpSchema),
-    defaultValues,
+    defaultValues: {
+      userName: "",
+      email: "",
+      sic: "",
+      branch: "",
+      password: "",
+      year: "",
+      phoneNumber: "",
+    },
   });
 
-  async function onSubmit(values: SignUpType) {
+  function onSubmit(values: SignUpType) {
     console.log(values);
   }
 
@@ -76,6 +82,19 @@ export function RegisterAuthForm({
             render={({ field }) => (
               <FormItem>
                 <FormLabel>SIC Number</FormLabel>
+                <FormControl>
+                  <Input placeholder="SIC Number" {...field} />
+                </FormControl>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+          <FormField
+            control={form.control}
+            name="phoneNumber"
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel>Phone Number</FormLabel>
                 <FormControl>
                   <Input placeholder="SIC Number" {...field} />
                 </FormControl>
@@ -160,7 +179,7 @@ export function RegisterAuthForm({
               </FormItem>
             )}
           />
-          <Button type="submit">Sign Up</Button>
+          <Button type="submit">Update account</Button>
         </form>
       </Form>
     </div>

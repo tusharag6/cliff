@@ -1,21 +1,38 @@
 import { z } from "zod";
 
 export const SignUpSchema = z.object({
-  userName: z.string().min(2),
-  sic: z.string().length(8, {
-    message: "SIC should be 8 characters long",
-  }),
-  branch: z.string().min(3),
-  year: z.string().length(1),
-  phoneNumber: z.string().length(10, {
-    message: "Phone number should be 10 characters long",
-  }),
-  email: z.string().email({
-    message: "Please enter a valid email address.",
-  }),
-  password: z.string().min(6, {
-    message: "Password must be at least 6 characters.",
-  }),
+  userName: z
+    .string()
+    .min(2, { message: "Username must be at least 2 characters long." })
+    .max(50, { message: "Username can't be longer than 50 characters." }),
+  sic: z
+    .string()
+    .length(8, { message: "SIC should be exactly 8 characters long." })
+    .regex(/^[a-zA-Z0-9]*$/, {
+      message: "SIC should only contain alphanumeric characters.",
+    }),
+  branch: z
+    .string()
+    .regex(/^(cse|cen|cst|ece|eie|eee)$/, { message: "Must select a branch." }),
+  year: z
+    .string()
+    .regex(/^(first|second|third|fourth)$/, { message: "Must select a year." }),
+  phoneNumber: z
+    .string()
+    .length(10, { message: "Phone number should be exactly 10 digits long." })
+    .regex(/^\d{10}$/, { message: "Phone number should only contain digits." }),
+  email: z.string().email({ message: "Please enter a valid email address." }),
+  password: z
+    .string()
+    .min(6, { message: "Password must be at least 6 characters long." })
+    .max(20, { message: "Password can't be longer than 20 characters." })
+    .regex(
+      /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/,
+      {
+        message:
+          "Password must contain at least one uppercase letter, one lowercase letter, one digit, and one special character.",
+      },
+    ),
 });
 
 export const RegisteredTeamsSchema = z.object({
