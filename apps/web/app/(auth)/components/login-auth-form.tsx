@@ -25,6 +25,8 @@ import {
   FormMessage,
 } from "@repo/ui/components/ui/form";
 import toast from "react-hot-toast";
+import { AuthError, signInWithEmailAndPassword } from "firebase/auth";
+import auth from "@repo/firebase-config/client";
 
 interface LoginAuthFormProps extends React.HTMLAttributes<HTMLDivElement> {}
 
@@ -38,7 +40,27 @@ export function LoginAuthForm({ className, ...props }: LoginAuthFormProps) {
   });
   async function onSubmit(values: SignInType) {
     console.log(values);
-    toast.success("Logged in successfully");
+    try {
+      const res = await signInWithEmailAndPassword(
+        auth,
+        values.email,
+        values.password,
+      );
+      if (res.user) {
+        toast.success("Logged in successfully");
+      }
+    } catch (error) {
+      const authError = error as AuthError;
+      if (authError.code === "auth/invalid-credential") {
+        toast.error("Invalid Credentials! Please try again.");
+      } else if (authError.code === "auth/user-not-found") {
+        toast("You are not registered yet! Please register first.", {
+          icon: "🚫",
+        });
+      } else {
+        toast.error("Some Error Occured, please try again!");
+      }
+    }
     form.reset();
   }
 
@@ -94,7 +116,11 @@ export function LoginAuthForm({ className, ...props }: LoginAuthFormProps) {
                   )}
                 />
               </div>
-              <Button type="submit" className="w-full mt-4">
+              <Button
+                type="submit"
+                className="w-full mt-4"
+                disabled={form.formState.isSubmitting}
+              >
                 Login
               </Button>
               <div className="mt-4 text-center text-sm">

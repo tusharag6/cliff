@@ -33,6 +33,8 @@ import {
 } from "@repo/ui/components/ui/card";
 import Link from "next/link";
 import toast from "react-hot-toast";
+import { createUserWithEmailAndPassword } from "firebase/auth";
+import auth from "@repo/firebase-config/client";
 
 const steps = [
   {
@@ -70,9 +72,23 @@ export function RegisterAuthForm({
     },
   });
 
-  function onSubmit(values: SignUpType) {
+  async function onSubmit(values: SignUpType) {
     console.log(values);
-    toast.success("Account created successfully");
+    try {
+      const res = await createUserWithEmailAndPassword(
+        auth,
+        values.email,
+        values.password,
+      );
+      if (res.user) {
+        toast.success("Account created successfully");
+      }
+    } catch (error) {
+      console.log("Error during registration", error);
+      toast.error("Some Error Occured, please try again!");
+    }
+    setPreviousStep(0);
+    setCurrentStep(0);
     form.reset();
   }
 
@@ -303,7 +319,11 @@ export function RegisterAuthForm({
                     <Button variant="outline" className="w-full" onClick={prev}>
                       Previous
                     </Button>
-                    <Button type="submit" className="w-full">
+                    <Button
+                      type="submit"
+                      className="w-full"
+                      disabled={form.formState.isSubmitting}
+                    >
                       Create an account
                     </Button>
                   </div>
