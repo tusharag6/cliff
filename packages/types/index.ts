@@ -3,27 +3,36 @@ import { z } from "zod";
 export const SignUpSchema = z.object({
   userName: z
     .string()
+    .trim()
     .min(2, { message: "Username must be at least 2 characters long." })
     .max(50, { message: "Username can't be longer than 50 characters." }),
   sic: z
     .string()
+    .trim()
     .length(8, { message: "SIC should be exactly 8 characters long." })
     .regex(/^[a-zA-Z0-9]*$/, {
       message: "SIC should only contain alphanumeric characters.",
     }),
   branch: z
     .string()
+    .trim()
     .regex(/^(cse|cen|cst|ece|eie|eee)$/, { message: "Must select a branch." }),
   year: z
     .string()
+    .trim()
     .regex(/^(first|second|third|fourth)$/, { message: "Must select a year." }),
   phoneNumber: z
     .string()
+    .trim()
     .length(10, { message: "Phone number should be exactly 10 digits long." })
     .regex(/^\d{10}$/, { message: "Phone number should only contain digits." }),
-  email: z.string().email({ message: "Please enter a valid email address." }),
+  email: z
+    .string()
+    .trim()
+    .email({ message: "Please enter a valid email address." }),
   password: z
     .string()
+    .trim()
     .min(6, { message: "Password must be at least 6 characters long." })
     .max(20, { message: "Password can't be longer than 20 characters." })
     .regex(
@@ -33,7 +42,11 @@ export const SignUpSchema = z.object({
           "Password must contain at least one uppercase letter, one lowercase letter, one digit, and one special character.",
       },
     ),
-  avatar: z.string().url({ message: "Avatar must be a valid URL." }).optional(),
+  avatar: z
+    .string()
+    .trim()
+    .url({ message: "Avatar must be a valid URL." })
+    .optional(),
   role: z.enum(["student", "admin"]).default("student"),
 });
 
