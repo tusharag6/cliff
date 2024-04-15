@@ -25,49 +25,81 @@ import {
   FormMessage,
 } from "@repo/ui/components/ui/form";
 import toast from "react-hot-toast";
-import { AuthError, signInWithEmailAndPassword } from "firebase/auth";
-import auth from "@repo/firebase-config/client";
+import { useEffect, useRef } from "react";
+import { loginUserAction } from "../actions";
+import { useFormState } from "react-dom";
 
 interface LoginAuthFormProps extends React.HTMLAttributes<HTMLDivElement> {}
 
 export function LoginAuthForm({ className, ...props }: LoginAuthFormProps) {
+  const [state, formAction] = useFormState(loginUserAction, {
+    message: "",
+  });
+
   const form = useForm<SignInType>({
     resolver: zodResolver(SignInSchema),
     defaultValues: {
       email: "",
       password: "",
+      ...(state?.fields ?? {}),
     },
   });
-  async function onSubmit(values: SignInType) {
-    console.log(values);
-    try {
-      const res = await signInWithEmailAndPassword(
-        auth,
-        values.email,
-        values.password,
-      );
-      if (res.user) {
-        toast.success("Logged in successfully");
-      }
-    } catch (error) {
-      const authError = error as AuthError;
-      if (authError.code === "auth/invalid-credential") {
-        toast.error("Invalid Credentials! Please try again.");
-      } else if (authError.code === "auth/user-not-found") {
-        toast("You are not registered yet! Please register first.", {
-          icon: "🚫",
-        });
-      } else {
-        toast.error("Some Error Occured, please try again!");
-      }
+
+  useEffect(() => {
+    if (state?.message !== "" && !state.issues) {
+      if (state.message === "Logged in successfully") {
+        toast.success(state.message);
+        form.reset();
+      } else toast.error(state.message);
     }
-    form.reset();
-  }
+  }, [state]);
+
+  const formRef = useRef<HTMLFormElement>(null);
+
+  // async function onSubmit(values: SignInType) {
+  //   console.log(values);
+  //   try {
+  //     const res = await signInWithEmailAndPassword(
+  //       auth,
+  //       values.email,
+  //       values.password,
+  //     );
+  //     if (res.user) {
+  //       toast.success("Logged in successfully");
+  //     }
+  //   } catch (error) {
+  //     const authError = error as AuthError;
+  //     if (authError.code === "auth/invalid-credential") {
+  //       toast.error("Invalid Credentials! Please try again.");
+  //     } else if (authError.code === "auth/user-not-found") {
+  //       toast("You are not registered yet! Please register first.", {
+  //         icon: "🚫",
+  //       });
+  //     } else {
+  //       toast.error("Some Error Occured, please try again!");
+  //     }
+  //   }
+  //   form.reset();
+  // }
 
   return (
     <div className={cn("grid gap-6", className)} {...props}>
       <Form {...form}>
-        <form onSubmit={form.handleSubmit(onSubmit)}>
+        {state?.issues && (
+          <div className="text-red-500">
+            <li className="flex gap-1">{state.issues[0]}</li>
+          </div>
+        )}
+        <form
+          ref={formRef}
+          action={formAction}
+          onSubmit={(evt) => {
+            evt.preventDefault();
+            form.handleSubmit(() => {
+              formAction(new FormData(formRef.current!));
+            })(evt);
+          }}
+        >
           <Card className="mx-auto max-w-sm">
             <CardHeader>
               <CardTitle className="text-2xl">Login</CardTitle>

@@ -81,9 +81,10 @@ export function RegisterAuthForm({
 
   useEffect(() => {
     if (state?.message !== "" && !state.issues) {
-      if (state.message === "User registered successfully")
+      if (state.message === "User registered successfully") {
         toast.success(state.message);
-      else toast.error(state.message);
+        form.reset();
+      } else toast.error(state.message);
     }
   }, [state]);
 
