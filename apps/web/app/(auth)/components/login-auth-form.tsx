@@ -56,32 +56,6 @@ export function LoginAuthForm({ className, ...props }: LoginAuthFormProps) {
 
   const formRef = useRef<HTMLFormElement>(null);
 
-  // async function onSubmit(values: SignInType) {
-  //   console.log(values);
-  //   try {
-  //     const res = await signInWithEmailAndPassword(
-  //       auth,
-  //       values.email,
-  //       values.password,
-  //     );
-  //     if (res.user) {
-  //       toast.success("Logged in successfully");
-  //     }
-  //   } catch (error) {
-  //     const authError = error as AuthError;
-  //     if (authError.code === "auth/invalid-credential") {
-  //       toast.error("Invalid Credentials! Please try again.");
-  //     } else if (authError.code === "auth/user-not-found") {
-  //       toast("You are not registered yet! Please register first.", {
-  //         icon: "🚫",
-  //       });
-  //     } else {
-  //       toast.error("Some Error Occured, please try again!");
-  //     }
-  //   }
-  //   form.reset();
-  // }
-
   return (
     <div className={cn("grid gap-6", className)} {...props}>
       <Form {...form}>

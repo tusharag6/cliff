@@ -59,26 +59,6 @@ export function RegisterAuthForm({
     },
   });
 
-  // async function onSubmit(values: SignUpType) {
-  //   console.log(values);
-  //   try {
-  //     const res = await createUserWithEmailAndPassword(
-  //       auth,
-  //       values.email,
-  //       values.password,
-  //     );
-  //     if (res.user) {
-  //       toast.success("Account created successfully");
-  //     }
-  //   } catch (error) {
-  //     console.log("Error during registration", error);
-  //     toast.error("Some Error Occured, please try again!");
-  //   }
-  //   setPreviousStep(0);
-  //   setCurrentStep(0);
-  //   form.reset();
-  // }
-
   useEffect(() => {
     if (state?.message !== "" && !state.issues) {
       if (state.message === "User registered successfully") {

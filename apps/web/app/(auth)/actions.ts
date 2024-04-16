@@ -1,6 +1,12 @@
 "use server";
 
 import { SignInSchema, SignUpSchema } from "@repo/types";
+import {
+  AuthError,
+  createUserWithEmailAndPassword,
+  signInWithEmailAndPassword,
+} from "firebase/auth";
+import { auth } from "./firebase";
 
 export type FormState = {
   message: string;
@@ -21,12 +27,31 @@ export async function registerUserAction(
   if (!parsed.success) {
     const fields: Record<string, string> = {};
     for (const key of Object.keys(formData)) {
+      // @ts-ignore
       fields[key] = formData[key].toString();
     }
     return {
       message: "Invalid form data",
       fields,
       issues: parsed.error.issues.map((issue) => issue.message),
+    };
+  }
+
+  try {
+    await createUserWithEmailAndPassword(
+      auth,
+      parsed.data.email,
+      parsed.data.password,
+    );
+  } catch (error) {
+    const authError = error as AuthError;
+    if (authError.code === "auth/email-already-in-use") {
+      return {
+        message: "Email is already in use! Please try another email.",
+      };
+    }
+    return {
+      message: "Some Error Occured, please try again!",
     };
   }
 
@@ -58,6 +83,7 @@ export async function loginUserAction(
   if (!parsed.success) {
     const fields: Record<string, string> = {};
     for (const key of Object.keys(formData)) {
+      // @ts-ignore
       fields[key] = formData[key].toString();
     }
     return {
@@ -65,6 +91,29 @@ export async function loginUserAction(
       fields,
       issues: parsed.error.issues.map((issue) => issue.message),
     };
+  }
+
+  try {
+    await signInWithEmailAndPassword(
+      auth,
+      parsed.data.email,
+      parsed.data.password,
+    );
+  } catch (error) {
+    const authError = error as AuthError;
+    if (authError.code === "auth/invalid-credential") {
+      return {
+        message: "Invalid Credentials! Please try again.",
+      };
+    } else if (authError.code === "auth/user-not-found") {
+      return {
+        message: "You are not registered yet! Please register first.",
+      };
+    } else {
+      return {
+        message: "Some Error Occured, please try again!",
+      };
+    }
   }
 
   /**
