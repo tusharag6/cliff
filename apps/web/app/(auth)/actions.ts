@@ -6,7 +6,8 @@ import {
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
 } from "firebase/auth";
-import { auth } from "./firebase";
+import { auth, db } from "./firebase";
+import { addDoc, collection } from "firebase/firestore";
 
 export type FormState = {
   message: string;
@@ -43,6 +44,20 @@ export async function registerUserAction(
       parsed.data.email,
       parsed.data.password,
     );
+    try {
+      const docRef = await addDoc(collection(db, "users"), {
+        email: parsed.data.email,
+        name: parsed.data.userName,
+        sic: parsed.data.sic,
+        branch: parsed.data.branch,
+        year: parsed.data.year,
+        phoneNumber: parsed.data.phoneNumber,
+        role: parsed.data.role,
+      });
+      console.log("Document written with ID: ", docRef.id);
+    } catch (error) {
+      console.error("Error adding document: ", error);
+    }
   } catch (error) {
     const authError = error as AuthError;
     if (authError.code === "auth/email-already-in-use") {
